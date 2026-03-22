@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">CineFast</string>
+    <string name="homepage_button">Get Started</string>
+    <string name="homepage_title">Explore now to experience the benefits</string>
+    <string name="homepage_description">Welcome to CineFast, a cinema seat booking application</string>
+    <string name="appName">CineFast</string>
+    <string name="splashimage">SplashImage</string>
+    <string name="background">background</string>
+</resources>

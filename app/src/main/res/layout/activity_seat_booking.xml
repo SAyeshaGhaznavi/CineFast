@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#121212"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp">
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_back"
+            android:layout_gravity="center_vertical"
+            android:padding="4dp"
+            app:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/tvMovieName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginStart="16dp"
+            android:layout_gravity="center_vertical"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#1E1E1E"
+        android:padding="8dp"
+        android:layout_marginBottom="24dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:background="#2CA63E"
+            android:padding="4dp"
+            android:text="+13"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="EN"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:background="#333333"
+            android:padding="4dp"
+            android:layout_marginEnd="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="ScreenX"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp"
+        app:cardBackgroundColor="#1E1E1E"
+        android:layout_marginBottom="24dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Theater"
+                        android:textColor="#888888"
+                        android:textSize="12sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Stars (90°Mall)"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="4dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hall"
+                        android:textColor="#888888"
+                        android:textSize="12sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1st"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="4dp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#333333"
+                android:layout_marginVertical="16dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Date"
+                        android:textColor="#888888"
+                        android:textSize="12sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="13.04.2025"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="4dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Time"
+                        android:textColor="#888888"
+                        android:textSize="12sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="22:15"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="4dp"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+    <GridLayout
+        android:id="@+id/seatGrid"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:columnCount="8"
+        android:rowCount="6"
+        android:alignmentMode="alignMargins"
+        android:columnOrderPreserved="true"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/seat_a1"
+            android:text="A1"
+            style="@style/SeatStyle"
+            android:background="#333333"
+            android:tag="available"/>
+        <TextView
+            android:id="@+id/seat_a2"
+            android:text="A2"
+            style="@style/SeatStyle"
+            android:background="#333333"
+            android:tag="available"/>
+        <TextView
+            android:id="@+id/seat_a3"
+            android:text="A3"
+            style="@style/SeatStyle"
+            android:background="#333333"
+            android:tag="available"/>
+        <TextView
+            android:id="@+id/seat_a4"
+            android:text="A4"
+            style="@style/SeatStyle"
+            android:background="#333333"
+            android:tag="available"/>
+        <TextView
+            android:id="@+id/seat_a5"
+            android:text="A5"
+            style="@style/SeatStyle"
+            android:background="#333333"
+            android:tag="available"/>
+        <TextView
+            android:id="@+id/seat_a6"
+            android:text="A6"
+            style="@style/SeatStyle"
+            android:background="#333333"
+            android:tag="available"/>
+        <TextView
+            android:id="@+id/seat_a7"
+            android:text="A7"
+            style="@style/SeatStyle"
+            android:background="#333333"
+            android:tag="available"/>
+        <TextView
+            android:id="@+id/seat_a8"
+            android:text="A8"
+            style="@style/SeatStyle"
+            android:background="#333333"
+            android:tag="available"/>
+
+        <!-- Row B -->
+        <TextView
+            android:id="@+id/seat_b1"
+            android:text="B1"
+            style="@style/SeatStyle"
+            android:background="#333333"
+            android:tag="available"/>
+        <TextView
+            android:id="@+id/seat_b2"
+            android:text="B2"
+            style="@style/SeatStyle"
+            android:background="#333333"
+            android:tag="available"/>
+        <TextView
+            android:id="@+id/seat_b3"
+            android:text="B3"
+            style="@style/SeatStyle"
+            android:background="#333333"
+            android:tag="available"/>
+        <TextView
+            android:id="@+id/seat_b4"
+            android:text="B4"
+            style="@style/SeatStyle"
+            android:background="#333333"
+            android:tag="available"/>
+        <TextView
+            android:id="@+id/seat_b5"
+            android:text="B5"
+            style="@style/SeatStyle"
+            android:background="#333333"
+            android:tag="available"/>
+        <TextView
+            android:id="@+id/seat_b6"
+            android:text="B6"
+            style="@style/SeatStyle"
+            android:background="#333333"
+            android:tag="available"/>
+        <TextView
+            android:id="@+id/seat_b7"
+            android:text="B7"
+            style="@style/SeatStyle"
+            android:background="#333333"
+            android:tag="available"/>
+        <TextView
+            android:id="@+id/seat_b8"
+            android:text="B8"
+            style="@style/SeatStyle"
+            android:background="#333333"
+            android:tag="available"/>
+
+        <TextView
+            android:id="@+id/seat_c1"
+            android:text="C1"
+            style="@style/SeatStyle"
+            android:background="#FF4444"
+            android:tag="booked"/>
+        <TextView
+            android:id="@+id/seat_c2"
+            android:text="C2"
+            style="@style/SeatStyle"
+            android:background="#333333"
+            android:tag="available"/>
+        <TextView
+            android:id="@+id/seat_c3"
+            android:text="C3"
+            style="@style/SeatStyle"
+            android:background="#4CAF50"
+            android:tag="available"/>
+        <TextView
+            android:id="@+id/seat_c4"
+            android:text="C4"
+            style="@style/SeatStyle"
+            android:background="#333333"
+            android:tag="available"/>
+        <TextView
+            android:id="@+id/seat_c5"
+            android:text="C5"
+            style="@style/SeatStyle"
+            android:background="#333333"
+            android:tag="available"/>
+        <TextView
+            android:id="@+id/seat_c6"
+            android:text="C6"
+            style="@style/SeatStyle"
+            android:background="#333333"
+            android:tag="available"/>
+        <TextView
+            android:id="@+id/seat_c7"
+            android:text="C7"
+            style="@style/SeatStyle"
+            android:background="#333333"
+            android:tag="available"/>
+        <TextView
+            android:id="@+id/seat_c8"
+            android:text="C8"
+            style="@style/SeatStyle"
+            android:background="#333333"
+            android:tag="available"/>
+    </GridLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="24dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginEnd="24dp">
+
+            <View
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="#FF4444"
+                android:layout_marginEnd="8dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Booked"
+                android:textColor="#FFFFFF"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginEnd="24dp">
+
+            <View
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="#4CAF50"
+                android:layout_marginEnd="8dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Yours"
+                android:textColor="#FFFFFF"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="#333333"
+                android:layout_marginEnd="8dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Available"
+                android:textColor="#FFFFFF"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/btnBookSeats"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/red"
+            android:text="Book Seats"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/btnProceedToSnacks"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/white"
+            android:text="Proceed to Snacks"
+            android:textColor="@color/black" />
+
+    </LinearLayout>
+
+</LinearLayout>
