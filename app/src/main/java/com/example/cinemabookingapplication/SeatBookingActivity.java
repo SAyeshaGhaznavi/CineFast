@@ -49,7 +49,7 @@ public class SeatBookingActivity extends AppCompatActivity {
         movieDetails = getIntent().getStringExtra("movie_details");
 
         if (movieName == null) {
-            movieName = "Movie";
+            movieName = "com.example.cinemabookingapplication.Movie";
         }
 
         tvMovieName.setText(movieName);

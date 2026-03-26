@@ -57,7 +57,7 @@ public class SnacksActivity extends AppCompatActivity {
         selectedSeats = getIntent().getStringExtra("selected_seats");
         totalSeats = getIntent().getStringExtra("total_seats");
 
-        if (movieName == null) movieName = "Movie";
+        if (movieName == null) movieName = "com.example.cinemabookingapplication.Movie";
         if (selectedSeats == null) selectedSeats = "No seats selected";
         if (totalSeats == null) totalSeats = "0";
     }
@@ -97,7 +97,7 @@ public class SnacksActivity extends AppCompatActivity {
     }
 
     private void setInitialData() {
-        tvMovieInfo.setText("Movie: " + movieName);
+        tvMovieInfo.setText("com.example.cinemabookingapplication.Movie: " + movieName);
         tvSelectedSeats.setText("Selected Seats: " + selectedSeats);
         updateTotalDisplay();
     }

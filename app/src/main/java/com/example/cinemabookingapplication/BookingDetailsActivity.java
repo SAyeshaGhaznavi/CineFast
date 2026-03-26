@@ -24,7 +24,7 @@ public class BookingDetailsActivity extends AppCompatActivity {
         TextView tvTotalAmount = findViewById(R.id.tvTotalAmount);
         TextView tvThankYou = findViewById(R.id.tvThankYou);
 
-        tvMovieName.setText("Movie: " + movieName);
+        tvMovieName.setText("com.example.cinemabookingapplication.Movie: " + movieName);
         tvSeats.setText("Seats: " + selectedSeats + " (" + totalSeats + " seats)");
 
         if (snacksOrder != null && !snacksOrder.isEmpty()) {

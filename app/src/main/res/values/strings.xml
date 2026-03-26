@@ -6,4 +6,7 @@
     <string name="appName">CineFast</string>
     <string name="splashimage">SplashImage</string>
     <string name="background">background</string>
+    <string name="en">EN</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

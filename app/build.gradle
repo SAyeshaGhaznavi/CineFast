@@ -40,4 +40,5 @@ dependencies {
     androidTestImplementation libs.espresso.core
     implementation libs.core.splashscreen
     implementation libs.cardview
+    implementation libs.material.v1110
 }

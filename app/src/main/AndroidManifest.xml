@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CineFast">
         <activity
+            android:name=".Home1Activity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity
