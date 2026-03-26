@@ -50,7 +50,10 @@ public class NowShowingFragment extends Fragment {
         ));
 
         // ✅ SET ADAPTER
-        MovieAdapter adapter = new MovieAdapter(movieList, getParentFragmentManager());
+        MovieAdapter adapter = new MovieAdapter(
+                movieList,
+                requireActivity().getSupportFragmentManager()
+        );
         recyclerView.setAdapter(adapter);
 
         return view;

@@ -90,27 +90,66 @@ public class SeatSelectionFragment extends Fragment {
         return view;
     }
 
+//    private void setupSeatClicks(GridLayout seatGrid) {
+//        for (int i = 0; i < seatGrid.getChildCount(); i++) {
+//            View seatView = seatGrid.getChildAt(i);
+//
+//            if (seatView instanceof TextView) {
+//                TextView seat = (TextView) seatView;
+//
+//                seat.setOnClickListener(v -> {
+//                    String seatNum = seat.getText().toString();
+//
+//                    if (selectedSeats.contains(seatNum)) {
+//                        selectedSeats.remove(seatNum);
+//
+//                        seat.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.grayBg));
+//                        seat.setTextColor(ContextCompat.getColor(getContext(), R.color.white));
+//
+//                    } else {
+//                        selectedSeats.add(seatNum);
+//
+//                        seat.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.white));
+//                        seat.setTextColor(ContextCompat.getColor(getContext(), android.R.color.black));
+//                    }
+//                });
+//            }
+//        }
+//    }
+
     private void setupSeatClicks(GridLayout seatGrid) {
         for (int i = 0; i < seatGrid.getChildCount(); i++) {
             View seatView = seatGrid.getChildAt(i);
 
+            // Skip row label TextViews (they have text but shouldn't be clickable)
             if (seatView instanceof TextView) {
                 TextView seat = (TextView) seatView;
+                String seatText = seat.getText().toString();
+
+                // Skip if it's a row label (A, B, C, etc.) or column number
+                if (seatText.matches("[A-G]") || seatText.matches("\\d+") || seatText.isEmpty()) {
+                    continue;
+                }
+
+                // Check if seat is already booked (background #FF4444)
+                // You'll need to store this state properly
+                final String tag = (String) seat.getTag();
+                if ("booked".equals(tag)) {
+                    seat.setClickable(false);
+                    seat.setAlpha(0.5f);
+                    continue;
+                }
 
                 seat.setOnClickListener(v -> {
-                    String seatNum = seat.getText().toString();
+                    TextView clickedSeat = (TextView) v;
+                    String seatNum = clickedSeat.getText().toString();
 
                     if (selectedSeats.contains(seatNum)) {
                         selectedSeats.remove(seatNum);
-
-                        seat.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.grayBg));
-                        seat.setTextColor(ContextCompat.getColor(getContext(), R.color.white));
-
+                        clickedSeat.setSelected(false);
                     } else {
                         selectedSeats.add(seatNum);
-
-                        seat.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.white));
-                        seat.setTextColor(ContextCompat.getColor(getContext(), android.R.color.black));
+                        clickedSeat.setSelected(true);
                     }
                 });
             }

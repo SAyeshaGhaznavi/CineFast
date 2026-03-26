@@ -28,30 +28,41 @@ public class ComingSoonFragment extends Fragment {
 
 
         movieList.add(new Movie(
-                "Avatar 3",
+                "Dune III",
                 "Sci-Fi / Coming Soon",
                 "https://www.youtube.com/watch?v=d9MyW72ELq0",
-                R.drawable.poster,
+                R.drawable.dune3,
                 true
         ));
 
         movieList.add(new Movie(
-                "Joker 2",
+                "The Odyssey",
                 "Drama / Coming Soon",
                 "https://www.youtube.com/watch?v=xy8aJw1vYHo",
-                R.drawable.poster,
+                R.drawable.odyssey,
                 true
         ));
 
         movieList.add(new Movie(
-                "Dune Part 2",
-                "Sci-Fi / Coming Soon",
+                "The Drama",
+                "Drama / Coming Soon",
                 "https://www.youtube.com/watch?v=Way9Dexny3w",
-                R.drawable.poster,
+                R.drawable.thedrama,
                 true
         ));
 
-        MovieAdapter adapter = new MovieAdapter(movieList, getParentFragmentManager());
+        movieList.add(new Movie(
+                "Dracula",
+                "Drama / Coming Soon",
+                "https://www.youtube.com/watch?v=Way9Dexny3w",
+                R.drawable.dracula,
+                true
+        ));
+
+        MovieAdapter adapter = new MovieAdapter(
+                movieList,
+                requireActivity().getSupportFragmentManager()
+        );
         recyclerView.setAdapter(adapter);
 
         return view;

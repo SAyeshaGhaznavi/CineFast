@@ -3,6 +3,7 @@ package com.example.cinemabookingapplication;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.view.LayoutInflater;
@@ -44,6 +45,16 @@ public class HomeFragment extends Fragment {
         setupViewPager();
 
         return view;
+    }
+
+    private FragmentManager fragmentManager;
+
+    public void setFragmentManager(FragmentManager fm) {
+        this.fragmentManager = fm;
+    }
+
+    public FragmentManager getFragmentManagerFromActivity() {
+        return fragmentManager;
     }
 
     private void setupViewPager() {
