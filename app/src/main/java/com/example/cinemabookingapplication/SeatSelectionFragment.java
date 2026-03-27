@@ -2,6 +2,7 @@ package com.example.cinemabookingapplication;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,11 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.core.content.ContextCompat;
-
 import androidx.fragment.app.Fragment;
-
-import com.example.cinemabookingapplication.Movie;
-import com.example.cinemabookingapplication.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,12 +72,16 @@ public class SeatSelectionFragment extends Fragment {
             });
 
         } else {
-            // NORMAL FLOW
+            // NORMAL FLOW - Setup seat clicks
             setupSeatClicks(seatGrid);
 
-            btnBook.setOnClickListener(v ->
-                    Toast.makeText(getContext(), "Booking Confirmed!", Toast.LENGTH_SHORT).show()
-            );
+            btnBook.setOnClickListener(v -> {
+                if (selectedSeats.isEmpty()) {
+                    Toast.makeText(getContext(), "Please select at least one seat", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext(), "Booking Confirmed for " + selectedSeats.size() + " seats!", Toast.LENGTH_SHORT).show();
+                }
+            });
 
             btnSnacks.setOnClickListener(v ->
                     Toast.makeText(getContext(), "Go to Snacks (next step)", Toast.LENGTH_SHORT).show()
@@ -90,66 +91,38 @@ public class SeatSelectionFragment extends Fragment {
         return view;
     }
 
-//    private void setupSeatClicks(GridLayout seatGrid) {
-//        for (int i = 0; i < seatGrid.getChildCount(); i++) {
-//            View seatView = seatGrid.getChildAt(i);
-//
-//            if (seatView instanceof TextView) {
-//                TextView seat = (TextView) seatView;
-//
-//                seat.setOnClickListener(v -> {
-//                    String seatNum = seat.getText().toString();
-//
-//                    if (selectedSeats.contains(seatNum)) {
-//                        selectedSeats.remove(seatNum);
-//
-//                        seat.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.grayBg));
-//                        seat.setTextColor(ContextCompat.getColor(getContext(), R.color.white));
-//
-//                    } else {
-//                        selectedSeats.add(seatNum);
-//
-//                        seat.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.white));
-//                        seat.setTextColor(ContextCompat.getColor(getContext(), android.R.color.black));
-//                    }
-//                });
-//            }
-//        }
-//    }
-
     private void setupSeatClicks(GridLayout seatGrid) {
         for (int i = 0; i < seatGrid.getChildCount(); i++) {
             View seatView = seatGrid.getChildAt(i);
 
-            // Skip row label TextViews (they have text but shouldn't be clickable)
             if (seatView instanceof TextView) {
                 TextView seat = (TextView) seatView;
-                String seatText = seat.getText().toString();
+                String seatTag = (String) seat.getTag();
 
-                // Skip if it's a row label (A, B, C, etc.) or column number
-                if (seatText.matches("[A-G]") || seatText.matches("\\d+") || seatText.isEmpty()) {
-                    continue;
-                }
-
-                // Check if seat is already booked (background #FF4444)
-                // You'll need to store this state properly
-                final String tag = (String) seat.getTag();
-                if ("booked".equals(tag)) {
+                // Skip if seat is already booked
+                if ("booked".equals(seatTag)) {
                     seat.setClickable(false);
-                    seat.setAlpha(0.5f);
+                    seat.setAlpha(0.6f);
                     continue;
                 }
 
+                // Make available seats clickable
                 seat.setOnClickListener(v -> {
                     TextView clickedSeat = (TextView) v;
                     String seatNum = clickedSeat.getText().toString();
 
                     if (selectedSeats.contains(seatNum)) {
+                        // Deselect seat
                         selectedSeats.remove(seatNum);
-                        clickedSeat.setSelected(false);
+                        clickedSeat.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.grayBg));
+                        clickedSeat.setTextColor(ContextCompat.getColor(getContext(), R.color.white));
+                        clickedSeat.setTag("available");
                     } else {
+                        // Select seat
                         selectedSeats.add(seatNum);
-                        clickedSeat.setSelected(true);
+                        clickedSeat.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.green));
+                        clickedSeat.setTextColor(ContextCompat.getColor(getContext(), android.R.color.black));
+                        clickedSeat.setTag("selected");
                     }
                 });
             }
