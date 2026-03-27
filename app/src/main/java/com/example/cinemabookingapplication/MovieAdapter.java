@@ -52,7 +52,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
         holder.title.setText(movie.name);
         holder.details.setText(movie.details);
-        holder.image.setImageResource(movie.image);
+        holder.image.setImageResource(movie.posterResId); // Changed from movie.image to movie.posterResId
 
         holder.btnTrailer.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(movie.trailer));
@@ -61,7 +61,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
         holder.btnBook.setOnClickListener(v -> {
             SeatSelectionFragment fragment = SeatSelectionFragment.newInstance(movie);
-
             fragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, fragment)
                     .addToBackStack(null)

@@ -16,14 +16,16 @@ public class SnacksFragment extends Fragment {
     private String selectedSeats;
     private int seatCount;
     private double seatTotalPrice;
+    private int moviePosterResId; // Add this field
 
-    public static SnacksFragment newInstance(String movieName, String selectedSeats, int seatCount, double seatTotalPrice) {
+    public static SnacksFragment newInstance(String movieName, String selectedSeats, int seatCount, double seatTotalPrice, int moviePosterResId) {
         SnacksFragment fragment = new SnacksFragment();
         Bundle args = new Bundle();
         args.putString("movieName", movieName);
         args.putString("selectedSeats", selectedSeats);
         args.putInt("seatCount", seatCount);
         args.putDouble("seatTotalPrice", seatTotalPrice);
+        args.putInt("moviePosterResId", moviePosterResId); // Add this
         fragment.setArguments(args);
         return fragment;
     }
@@ -32,18 +34,17 @@ public class SnacksFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_snacks, container, false);
 
-        // Get arguments
         if (getArguments() != null) {
             movieName = getArguments().getString("movieName");
             selectedSeats = getArguments().getString("selectedSeats");
             seatCount = getArguments().getInt("seatCount");
             seatTotalPrice = getArguments().getDouble("seatTotalPrice");
+            moviePosterResId = getArguments().getInt("moviePosterResId", R.drawable.poster); // Get poster
         }
 
         ListView listView = view.findViewById(R.id.snackListView);
         Button btnConfirm = view.findViewById(R.id.btnConfirm);
 
-        // Optional: Add a TextView to show selected seats
         TextView tvSelectedSeats = view.findViewById(R.id.tvSelectedSeats);
         if (tvSelectedSeats != null) {
             tvSelectedSeats.setText("Selected Seats: " + selectedSeats + " (" + seatCount + " seats - $" + String.format("%.2f", seatTotalPrice) + ")");
@@ -67,21 +68,17 @@ public class SnacksFragment extends Fragment {
             for (Snack snack : snackList) {
                 if (snack.quantity > 0) {
                     snacksTotal += snack.quantity * snack.price;
-                    // Format for display in summary
                     snacksSummary.append(snack.name).append(" x").append(snack.quantity)
                             .append(" = $").append(String.format("%.2f", snack.quantity * snack.price))
                             .append("\n");
-                    // Format for storage in SharedPreferences
                     snacksDetails.append(snack.name).append(" x").append(snack.quantity)
                             .append(" ($").append(String.format("%.2f", snack.quantity * snack.price))
                             .append(")\n");
                 }
             }
 
-            // Calculate grand total (seats + snacks)
             double grandTotal = seatTotalPrice + snacksTotal;
 
-            // Create snacks summary string
             String snacksDetailsStr;
             if (snacksSummary.length() > 0) {
                 snacksDetailsStr = snacksDetails.toString();
@@ -89,21 +86,21 @@ public class SnacksFragment extends Fragment {
                 snacksDetailsStr = "No snacks selected";
             }
 
-            // Create full booking details for display
             String bookingDetails = "Movie: " + movieName +
                     "\n\nSeats: " + selectedSeats +
                     "\nSeats Total: $" + String.format("%.2f", seatTotalPrice) +
                     "\n\nSnacks:\n" + snacksSummary.toString() +
                     "\nTotal Amount: $" + String.format("%.2f", grandTotal);
 
-            // Pass to Ticket Summary with snacks details
+            // Pass the movie poster resource ID
             TicketSummaryFragment fragment = TicketSummaryFragment.newInstance(
                     bookingDetails,
                     grandTotal,
                     movieName,
                     selectedSeats,
                     snacksDetailsStr,
-                    snacksTotal
+                    snacksTotal,
+                    moviePosterResId // Pass the poster here
             );
 
             requireActivity().getSupportFragmentManager()

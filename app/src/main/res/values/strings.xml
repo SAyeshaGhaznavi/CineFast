@@ -9,4 +9,9 @@
     <string name="en">EN</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="confirm_and_continue">Confirm and Continue</string>
+    <string name="snacks_and_drinks">Snacks And Drinks</string>
+    <string name="select_items">Select Items</string>
+    <string name="fast">FAST</string>
+    <string name="cine">Cine</string>
 </resources>

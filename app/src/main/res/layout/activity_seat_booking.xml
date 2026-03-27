@@ -80,17 +80,20 @@
                 android:paddingVertical="3dp"/>
         </LinearLayout>
 
-        <!-- Info Row -->
+        <!-- Info Row - CENTERED -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:weightSum="4">
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:gravity="center">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -125,7 +128,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:gravity="center">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -160,7 +164,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:gravity="center">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -195,7 +200,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:gravity="center">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -236,7 +242,7 @@
         android:orientation="vertical"
         android:background="#111111">
 
-        <!-- Screen arc indicator -->
+        <!-- Screen arc indicator - CENTERED -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -248,380 +254,420 @@
             <ImageView
                 android:layout_width="220dp"
                 android:layout_height="30dp"
-                android:src="@drawable/ic_screen_arc"/>
+                android:src="@drawable/ic_screen_arc" />
         </LinearLayout>
 
-        <!-- Seat Grid -->
+        <!-- Seat Grid - CENTERED with 8 columns (4 seats, gap, 4 seats) -->
         <GridLayout
             android:id="@+id/seatGrid"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_gravity="center_horizontal"
             android:layout_weight="1"
-            android:columnCount="9"
-            android:rowCount="5"
             android:alignmentMode="alignMargins"
+            android:columnCount="9"
             android:columnOrderPreserved="true"
-            android:padding="8dp"
-            android:layout_gravity="center">
+            android:paddingLeft="40dp"
+            android:paddingTop="20dp"
+            android:rowCount="5">
 
-            <!-- ROW A: seats without visible text -->
+            <!-- ROW A: 4 seats, gap, 4 seats -->
             <TextView
                 android:id="@+id/seat_a1"
-                android:text=""
-                android:tag="A1"
                 style="@style/SeatStyle"
-                android:background="@drawable/bg_seat_available"
+                android:layout_row="0"
                 android:layout_column="0"
-                android:layout_row="0"/>
+                android:background="@drawable/bg_seat_available"
+                android:tag="A1"
+                android:text="" />
+
             <TextView
                 android:id="@+id/seat_a2"
-                android:text=""
-                android:tag="A2"
                 style="@style/SeatStyle"
-                android:background="@drawable/bg_seat_available"
+                android:layout_row="0"
                 android:layout_column="1"
-                android:layout_row="0"/>
+                android:background="@drawable/bg_seat_available"
+                android:tag="A2"
+                android:text="" />
+
             <TextView
                 android:id="@+id/seat_a3"
-                android:text=""
-                android:tag="A3"
                 style="@style/SeatStyle"
-                android:background="@drawable/bg_seat_available"
+                android:layout_row="0"
                 android:layout_column="2"
-                android:layout_row="0"/>
+                android:background="@drawable/bg_seat_available"
+                android:tag="A3"
+                android:text="" />
+
             <TextView
                 android:id="@+id/seat_a4"
-                android:text=""
-                android:tag="A4"
                 style="@style/SeatStyle"
-                android:background="@drawable/bg_seat_available"
+                android:layout_row="0"
                 android:layout_column="3"
-                android:layout_row="0"/>
+                android:background="@drawable/bg_seat_available"
+                android:tag="A4"
+                android:text="" />
+            <!-- AISLE GAP col 4 -->
+            <Space
+                android:layout_width="24dp"
+                android:layout_height="0dp"
+                android:layout_row="0"
+                android:layout_column="4" />
+
             <TextView
                 android:id="@+id/seat_a5"
-                android:text=""
-                android:tag="A5"
                 style="@style/SeatStyle"
-                android:background="@drawable/bg_seat_available"
-                android:layout_column="4"
-                android:layout_row="0"/>
-            <!-- AISLE GAP col 5 -->
-            <Space
-                android:layout_width="20dp"
-                android:layout_height="0dp"
+                android:layout_row="0"
                 android:layout_column="5"
-                android:layout_row="0"/>
+                android:background="@drawable/bg_seat_available"
+                android:tag="A5"
+                android:text="" />
+
             <TextView
                 android:id="@+id/seat_a6"
-                android:text=""
-                android:tag="A6"
                 style="@style/SeatStyle"
-                android:background="@drawable/bg_seat_available"
+                android:layout_row="0"
                 android:layout_column="6"
-                android:layout_row="0"/>
+                android:background="@drawable/bg_seat_available"
+                android:tag="A6"
+                android:text="" />
+
             <TextView
                 android:id="@+id/seat_a7"
-                android:text=""
-                android:tag="A7"
                 style="@style/SeatStyle"
-                android:background="@drawable/bg_seat_available"
+                android:layout_row="0"
                 android:layout_column="7"
-                android:layout_row="0"/>
+                android:background="@drawable/bg_seat_available"
+                android:tag="A7"
+                android:text="" />
+
             <TextView
                 android:id="@+id/seat_a8"
-                android:text=""
-                android:tag="A8"
                 style="@style/SeatStyle"
-                android:background="@drawable/bg_seat_available"
+                android:layout_row="0"
                 android:layout_column="8"
-                android:layout_row="0"/>
+                android:background="@drawable/bg_seat_available"
+                android:tag="A8"
+                android:text="" />
 
             <!-- ROW B -->
             <TextView
                 android:id="@+id/seat_b1"
-                android:text=""
-                android:tag="B1"
                 style="@style/SeatStyle"
-                android:background="@drawable/bg_seat_booked"
+                android:layout_row="1"
                 android:layout_column="0"
-                android:layout_row="1"/>
+                android:background="@drawable/bg_seat_booked"
+                android:tag="B1"
+                android:text="" />
+
             <TextView
                 android:id="@+id/seat_b2"
-                android:text=""
-                android:tag="B2"
                 style="@style/SeatStyle"
-                android:background="@drawable/bg_seat_available"
+                android:layout_row="1"
                 android:layout_column="1"
-                android:layout_row="1"/>
+                android:background="@drawable/bg_seat_available"
+                android:tag="B2"
+                android:text="" />
+
             <TextView
                 android:id="@+id/seat_b3"
-                android:text=""
-                android:tag="B3"
                 style="@style/SeatStyle"
-                android:background="@drawable/bg_seat_available"
+                android:layout_row="1"
                 android:layout_column="2"
-                android:layout_row="1"/>
+                android:background="@drawable/bg_seat_available"
+                android:tag="B3"
+                android:text="" />
+
             <TextView
                 android:id="@+id/seat_b4"
-                android:text=""
-                android:tag="B4"
                 style="@style/SeatStyle"
-                android:background="@drawable/bg_seat_available"
+                android:layout_row="1"
                 android:layout_column="3"
-                android:layout_row="1"/>
+                android:background="@drawable/bg_seat_available"
+                android:tag="B4"
+                android:text="" />
+
+            <Space
+                android:layout_width="24dp"
+                android:layout_height="0dp"
+                android:layout_row="1"
+                android:layout_column="4" />
+
             <TextView
                 android:id="@+id/seat_b5"
-                android:text=""
-                android:tag="B5"
                 style="@style/SeatStyle"
-                android:background="@drawable/bg_seat_available"
-                android:layout_column="4"
-                android:layout_row="1"/>
-            <Space
-                android:layout_width="20dp"
-                android:layout_height="0dp"
+                android:layout_row="1"
                 android:layout_column="5"
-                android:layout_row="1"/>
+                android:background="@drawable/bg_seat_available"
+                android:tag="B5"
+                android:text="" />
+
             <TextView
                 android:id="@+id/seat_b6"
-                android:text=""
-                android:tag="B6"
                 style="@style/SeatStyle"
-                android:background="@drawable/bg_seat_booked"
+                android:layout_row="1"
                 android:layout_column="6"
-                android:layout_row="1"/>
+                android:background="@drawable/bg_seat_booked"
+                android:tag="B6"
+                android:text="" />
+
             <TextView
                 android:id="@+id/seat_b7"
-                android:text=""
-                android:tag="B7"
                 style="@style/SeatStyle"
-                android:background="@drawable/bg_seat_booked"
+                android:layout_row="1"
                 android:layout_column="7"
-                android:layout_row="1"/>
+                android:background="@drawable/bg_seat_booked"
+                android:tag="B7"
+                android:text="" />
+
             <TextView
                 android:id="@+id/seat_b8"
-                android:text=""
-                android:tag="B8"
                 style="@style/SeatStyle"
-                android:background="@drawable/bg_seat_available"
+                android:layout_row="1"
                 android:layout_column="8"
-                android:layout_row="1"/>
+                android:background="@drawable/bg_seat_available"
+                android:tag="B8"
+                android:text="" />
 
             <!-- ROW C -->
             <TextView
                 android:id="@+id/seat_c1"
-                android:text=""
-                android:tag="C1"
                 style="@style/SeatStyle"
-                android:background="@drawable/bg_seat_available"
+                android:layout_row="2"
                 android:layout_column="0"
-                android:layout_row="2"/>
+                android:background="@drawable/bg_seat_available"
+                android:tag="C1"
+                android:text="" />
+
             <TextView
                 android:id="@+id/seat_c2"
-                android:text=""
-                android:tag="C2"
                 style="@style/SeatStyle"
-                android:background="@drawable/bg_seat_available"
+                android:layout_row="2"
                 android:layout_column="1"
-                android:layout_row="2"/>
+                android:background="@drawable/bg_seat_available"
+                android:tag="C2"
+                android:text="" />
+
             <TextView
                 android:id="@+id/seat_c3"
-                android:text=""
-                android:tag="C3"
                 style="@style/SeatStyle"
-                android:background="@drawable/bg_seat_available"
+                android:layout_row="2"
                 android:layout_column="2"
-                android:layout_row="2"/>
+                android:background="@drawable/bg_seat_available"
+                android:tag="C3"
+                android:text="" />
+
             <TextView
                 android:id="@+id/seat_c4"
-                android:text=""
-                android:tag="C4"
                 style="@style/SeatStyle"
-                android:background="@drawable/bg_seat_available"
+                android:layout_row="2"
                 android:layout_column="3"
-                android:layout_row="2"/>
+                android:background="@drawable/bg_seat_available"
+                android:tag="C4"
+                android:text="" />
+
+            <Space
+                android:layout_width="24dp"
+                android:layout_height="0dp"
+                android:layout_row="2"
+                android:layout_column="4" />
+
             <TextView
                 android:id="@+id/seat_c5"
-                android:text=""
-                android:tag="C5"
                 style="@style/SeatStyle"
-                android:background="@drawable/bg_seat_available"
-                android:layout_column="4"
-                android:layout_row="2"/>
-            <Space
-                android:layout_width="20dp"
-                android:layout_height="0dp"
+                android:layout_row="2"
                 android:layout_column="5"
-                android:layout_row="2"/>
+                android:background="@drawable/bg_seat_available"
+                android:tag="C5"
+                android:text="" />
+
             <TextView
                 android:id="@+id/seat_c6"
-                android:text=""
-                android:tag="C6"
                 style="@style/SeatStyle"
-                android:background="@drawable/bg_seat_available"
+                android:layout_row="2"
                 android:layout_column="6"
-                android:layout_row="2"/>
+                android:background="@drawable/bg_seat_available"
+                android:tag="C6"
+                android:text="" />
+
             <TextView
                 android:id="@+id/seat_c7"
-                android:text=""
-                android:tag="C7"
                 style="@style/SeatStyle"
-                android:background="@drawable/bg_seat_available"
+                android:layout_row="2"
                 android:layout_column="7"
-                android:layout_row="2"/>
+                android:background="@drawable/bg_seat_available"
+                android:tag="C7"
+                android:text="" />
+
             <TextView
                 android:id="@+id/seat_c8"
-                android:text=""
-                android:tag="C8"
                 style="@style/SeatStyle"
-                android:background="@drawable/bg_seat_available"
+                android:layout_row="2"
                 android:layout_column="8"
-                android:layout_row="2"/>
+                android:background="@drawable/bg_seat_available"
+                android:tag="C8"
+                android:text="" />
 
             <!-- ROW D -->
             <TextView
                 android:id="@+id/seat_d1"
-                android:text=""
-                android:tag="D1"
                 style="@style/SeatStyle"
-                android:background="@drawable/bg_seat_available"
+                android:layout_row="3"
                 android:layout_column="0"
-                android:layout_row="3"/>
+                android:background="@drawable/bg_seat_available"
+                android:tag="D1"
+                android:text="" />
+
             <TextView
                 android:id="@+id/seat_d2"
-                android:text=""
-                android:tag="D2"
                 style="@style/SeatStyle"
-                android:background="@drawable/bg_seat_booked"
+                android:layout_row="3"
                 android:layout_column="1"
-                android:layout_row="3"/>
+                android:background="@drawable/bg_seat_booked"
+                android:tag="D2"
+                android:text="" />
+
             <TextView
                 android:id="@+id/seat_d3"
-                android:text=""
-                android:tag="D3"
                 style="@style/SeatStyle"
-                android:background="@drawable/bg_seat_booked"
+                android:layout_row="3"
                 android:layout_column="2"
-                android:layout_row="3"/>
+                android:background="@drawable/bg_seat_booked"
+                android:tag="D3"
+                android:text="" />
+
             <TextView
                 android:id="@+id/seat_d4"
-                android:text=""
-                android:tag="D4"
                 style="@style/SeatStyle"
-                android:background="@drawable/bg_seat_available"
+                android:layout_row="3"
                 android:layout_column="3"
-                android:layout_row="3"/>
+                android:background="@drawable/bg_seat_available"
+                android:tag="D4"
+                android:text="" />
+
+            <Space
+                android:layout_width="24dp"
+                android:layout_height="0dp"
+                android:layout_row="3"
+                android:layout_column="4" />
+
             <TextView
                 android:id="@+id/seat_d5"
-                android:text=""
-                android:tag="D5"
                 style="@style/SeatStyle"
-                android:background="@drawable/bg_seat_available"
-                android:layout_column="4"
-                android:layout_row="3"/>
-            <Space
-                android:layout_width="20dp"
-                android:layout_height="0dp"
+                android:layout_row="3"
                 android:layout_column="5"
-                android:layout_row="3"/>
+                android:background="@drawable/bg_seat_available"
+                android:tag="D5"
+                android:text="" />
+
             <TextView
                 android:id="@+id/seat_d6"
-                android:text=""
-                android:tag="D6"
                 style="@style/SeatStyle"
-                android:background="@drawable/bg_seat_available"
+                android:layout_row="3"
                 android:layout_column="6"
-                android:layout_row="3"/>
+                android:background="@drawable/bg_seat_available"
+                android:tag="D6"
+                android:text="" />
+
             <TextView
                 android:id="@+id/seat_d7"
-                android:text=""
-                android:tag="D7"
                 style="@style/SeatStyle"
-                android:background="@drawable/bg_seat_available"
+                android:layout_row="3"
                 android:layout_column="7"
-                android:layout_row="3"/>
+                android:background="@drawable/bg_seat_available"
+                android:tag="D7"
+                android:text="" />
+
             <TextView
                 android:id="@+id/seat_d8"
-                android:text=""
-                android:tag="D8"
                 style="@style/SeatStyle"
-                android:background="@drawable/bg_seat_available"
+                android:layout_row="3"
                 android:layout_column="8"
-                android:layout_row="3"/>
+                android:background="@drawable/bg_seat_available"
+                android:tag="D8"
+                android:text="" />
 
             <!-- ROW E -->
             <TextView
                 android:id="@+id/seat_e1"
-                android:text=""
-                android:tag="E1"
                 style="@style/SeatStyle"
-                android:background="@drawable/bg_seat_available"
+                android:layout_row="4"
                 android:layout_column="0"
-                android:layout_row="4"/>
+                android:background="@drawable/bg_seat_available"
+                android:tag="E1"
+                android:text="" />
+
             <TextView
                 android:id="@+id/seat_e2"
-                android:text=""
-                android:tag="E2"
                 style="@style/SeatStyle"
-                android:background="@drawable/bg_seat_available"
+                android:layout_row="4"
                 android:layout_column="1"
-                android:layout_row="4"/>
+                android:background="@drawable/bg_seat_available"
+                android:tag="E2"
+                android:text="" />
+
             <TextView
                 android:id="@+id/seat_e3"
-                android:text=""
-                android:tag="E3"
                 style="@style/SeatStyle"
-                android:background="@drawable/bg_seat_available"
+                android:layout_row="4"
                 android:layout_column="2"
-                android:layout_row="4"/>
+                android:background="@drawable/bg_seat_available"
+                android:tag="E3"
+                android:text="" />
+
             <TextView
                 android:id="@+id/seat_e4"
-                android:text=""
-                android:tag="E4"
                 style="@style/SeatStyle"
-                android:background="@drawable/bg_seat_available"
+                android:layout_row="4"
                 android:layout_column="3"
-                android:layout_row="4"/>
+                android:background="@drawable/bg_seat_available"
+                android:tag="E4"
+                android:text="" />
+
+            <Space
+                android:layout_width="24dp"
+                android:layout_height="0dp"
+                android:layout_row="4"
+                android:layout_column="4" />
+
             <TextView
                 android:id="@+id/seat_e5"
-                android:text=""
-                android:tag="E5"
                 style="@style/SeatStyle"
-                android:background="@drawable/bg_seat_available"
-                android:layout_column="4"
-                android:layout_row="4"/>
-            <Space
-                android:layout_width="20dp"
-                android:layout_height="0dp"
+                android:layout_row="4"
                 android:layout_column="5"
-                android:layout_row="4"/>
+                android:background="@drawable/bg_seat_available"
+                android:tag="E5"
+                android:text="" />
+
             <TextView
                 android:id="@+id/seat_e6"
-                android:text=""
-                android:tag="E6"
                 style="@style/SeatStyle"
-                android:background="@drawable/bg_seat_booked"
+                android:layout_row="4"
                 android:layout_column="6"
-                android:layout_row="4"/>
+                android:background="@drawable/bg_seat_booked"
+                android:tag="E6"
+                android:text="" />
+
             <TextView
                 android:id="@+id/seat_e7"
-                android:text=""
-                android:tag="E7"
                 style="@style/SeatStyle"
-                android:background="@drawable/bg_seat_booked"
+                android:layout_row="4"
                 android:layout_column="7"
-                android:layout_row="4"/>
+                android:background="@drawable/bg_seat_booked"
+                android:tag="E7"
+                android:text="" />
+
             <TextView
                 android:id="@+id/seat_e8"
-                android:text=""
-                android:tag="E8"
                 style="@style/SeatStyle"
-                android:background="@drawable/bg_seat_available"
+                android:layout_row="4"
                 android:layout_column="8"
-                android:layout_row="4"/>
+                android:background="@drawable/bg_seat_available"
+                android:tag="E8"
+                android:text="" />
         </GridLayout>
 
-        <!-- Legend -->
+        <!-- Legend - CENTERED -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

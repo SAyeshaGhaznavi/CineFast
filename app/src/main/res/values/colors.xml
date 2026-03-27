@@ -4,6 +4,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="red">#EE0000</color>
     <color name="grayText">#878787</color>
-    <color name="grayBg">#2F373E</color>
+    <color name="grayBg">#334C5D</color>
+    <color name="grayBtn">#6D7181</color>
+    <color name="graytxt">#959595</color>
     <color name="green">#30B715</color>
 </resources>

@@ -66,11 +66,11 @@
                     android:id="@+id/btnTrailer"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:layout_weight="1"
+                    android:backgroundTint="@color/white"
                     android:text="Trailer"
-                    android:backgroundTint="@color/red"
-                    android:textColor="@color/white"
-                    android:layout_marginStart="8dp"/>
+                    android:textColor="@color/black" />
             </LinearLayout>
 
         </LinearLayout>

@@ -31,6 +31,7 @@ public class SeatSelectionFragment extends Fragment {
         args.putString("details", movie.details);
         args.putString("trailer", movie.trailer);
         args.putBoolean("comingSoon", movie.isComingSoon);
+        args.putInt("posterResId", movie.posterResId); // Add poster resource ID
         fragment.setArguments(args);
         return fragment;
     }
@@ -49,6 +50,7 @@ public class SeatSelectionFragment extends Fragment {
         String name = getArguments().getString("name");
         boolean isComingSoon = getArguments().getBoolean("comingSoon");
         String trailer = getArguments().getString("trailer");
+        int posterResId = getArguments().getInt("posterResId", R.drawable.poster); // Get poster resource ID
 
         tvMovieName.setText(name);
 
@@ -67,14 +69,28 @@ public class SeatSelectionFragment extends Fragment {
             }
 
             btnBook.setText("Coming Soon");
-            btnBook.setEnabled(false);
+            btnBook.setOnClickListener(v -> {
+                requireActivity().getSupportFragmentManager().popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+                HomeFragment homeFragment = new HomeFragment();
+                homeFragment.setFragmentManager(requireActivity().getSupportFragmentManager());
+
+                Bundle argsBundle = new Bundle();
+                argsBundle.putBoolean("showComingSoon", true);
+                homeFragment.setArguments(argsBundle);
+
+                requireActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, homeFragment)
+                        .commit();
+            });
+            btnBook.setEnabled(true);
 
             btnSnacks.setText("Watch Trailer");
             btnSnacks.setOnClickListener(v -> {
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(trailer));
                 startActivity(intent);
             });
-
         } else {
             // Setup seat clicks
             setupSeatClicks();
@@ -92,13 +108,15 @@ public class SeatSelectionFragment extends Fragment {
                             "\n\nSnacks: No snacks selected" +
                             "\n\nTotal Amount: $" + String.format("%.2f", totalSeatPrice);
 
+                    // Pass the movie poster resource ID
                     TicketSummaryFragment fragment = TicketSummaryFragment.newInstance(
                             bookingDetails,
                             totalSeatPrice,
                             name,
                             seatsFormatted,
                             "No snacks selected",
-                            0
+                            0,
+                            posterResId // Use poster from arguments
                     );
 
                     requireActivity().getSupportFragmentManager()
@@ -116,11 +134,13 @@ public class SeatSelectionFragment extends Fragment {
                     double totalSeatPrice = selectedSeats.size() * seatPrice;
                     String seatsFormatted = formatSelectedSeats();
 
+                    // Pass the poster resource ID to SnacksFragment
                     SnacksFragment snacksFragment = SnacksFragment.newInstance(
                             name,
                             seatsFormatted,
                             selectedSeats.size(),
-                            totalSeatPrice
+                            totalSeatPrice,
+                            posterResId // Pass poster from arguments
                     );
 
                     requireActivity().getSupportFragmentManager()
@@ -158,7 +178,6 @@ public class SeatSelectionFragment extends Fragment {
                 if (seatTag == null) continue;
 
                 // Check if seat is booked by checking if it has booked background
-                // You can also store a separate "booked" tag
                 if (seat.getBackground().getConstantState() ==
                         getResources().getDrawable(R.drawable.bg_seat_booked).getConstantState()) {
                     seat.setClickable(false);

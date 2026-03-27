@@ -1,15 +1,17 @@
 package com.example.cinemabookingapplication;
 
 public class Movie {
-    public String name, details, trailer;
-    public int image;
+    public String name;
+    public String details;
+    public String trailer;
+    public int posterResId; // Change from R.drawable.poster to this
     public boolean isComingSoon;
 
-    public Movie(String name, String details, String trailer, int image, boolean isComingSoon) {
+    public Movie(String name, String details, String trailer, int posterResId, boolean isComingSoon) {
         this.name = name;
         this.details = details;
         this.trailer = trailer;
-        this.image = image;
+        this.posterResId = posterResId;
         this.isComingSoon = isComingSoon;
     }
 }
