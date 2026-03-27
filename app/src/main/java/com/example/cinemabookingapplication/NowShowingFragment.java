@@ -22,7 +22,6 @@ public class NowShowingFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // 🔥 MOVIE LIST (replaces your old array)
         ArrayList<Movie> movieList = new ArrayList<>();
 
         movieList.add(new Movie(
@@ -49,7 +48,6 @@ public class NowShowingFragment extends Fragment {
                 false
         ));
 
-        // ✅ SET ADAPTER
         MovieAdapter adapter = new MovieAdapter(
                 movieList,
                 requireActivity().getSupportFragmentManager()

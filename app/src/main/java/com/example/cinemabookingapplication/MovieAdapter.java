@@ -54,13 +54,11 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         holder.details.setText(movie.details);
         holder.image.setImageResource(movie.image);
 
-        // 🎬 Trailer button
         holder.btnTrailer.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(movie.trailer));
             v.getContext().startActivity(intent);
         });
 
-        // 🎟 Book Seats button → Fragment navigation
         holder.btnBook.setOnClickListener(v -> {
             SeatSelectionFragment fragment = SeatSelectionFragment.newInstance(movie);
 

@@ -46,7 +46,7 @@ public class SnacksFragment extends Fragment {
         // Optional: Add a TextView to show selected seats
         TextView tvSelectedSeats = view.findViewById(R.id.tvSelectedSeats);
         if (tvSelectedSeats != null) {
-            tvSelectedSeats.setText("Selected Seats: " + selectedSeats + " (" + seatCount + " seats)");
+            tvSelectedSeats.setText("Selected Seats: " + selectedSeats + " (" + seatCount + " seats - $" + String.format("%.2f", seatTotalPrice) + ")");
         }
 
         snackList = new ArrayList<>();
@@ -62,12 +62,19 @@ public class SnacksFragment extends Fragment {
         btnConfirm.setOnClickListener(v -> {
             double snacksTotal = 0;
             StringBuilder snacksSummary = new StringBuilder();
+            StringBuilder snacksDetails = new StringBuilder();
 
             for (Snack snack : snackList) {
                 if (snack.quantity > 0) {
                     snacksTotal += snack.quantity * snack.price;
-                    snacksSummary.append(snack.name).append(" x").append(snack.quantity).append(" = $")
-                            .append(String.format("%.2f", snack.quantity * snack.price)).append("\n");
+                    // Format for display in summary
+                    snacksSummary.append(snack.name).append(" x").append(snack.quantity)
+                            .append(" = $").append(String.format("%.2f", snack.quantity * snack.price))
+                            .append("\n");
+                    // Format for storage in SharedPreferences
+                    snacksDetails.append(snack.name).append(" x").append(snack.quantity)
+                            .append(" ($").append(String.format("%.2f", snack.quantity * snack.price))
+                            .append(")\n");
                 }
             }
 
@@ -75,22 +82,28 @@ public class SnacksFragment extends Fragment {
             double grandTotal = seatTotalPrice + snacksTotal;
 
             // Create snacks summary string
-            String snacksDetails;
+            String snacksDetailsStr;
             if (snacksSummary.length() > 0) {
-                snacksDetails = snacksSummary.toString();
+                snacksDetailsStr = snacksDetails.toString();
             } else {
-                snacksDetails = "No snacks selected";
+                snacksDetailsStr = "No snacks selected";
             }
 
-            // Pass to Ticket Summary
+            // Create full booking details for display
+            String bookingDetails = "Movie: " + movieName +
+                    "\n\nSeats: " + selectedSeats +
+                    "\nSeats Total: $" + String.format("%.2f", seatTotalPrice) +
+                    "\n\nSnacks:\n" + snacksSummary.toString() +
+                    "\nTotal Amount: $" + String.format("%.2f", grandTotal);
+
+            // Pass to Ticket Summary with snacks details
             TicketSummaryFragment fragment = TicketSummaryFragment.newInstance(
-                    "Movie: " + movieName +
-                            "\nSeats: " + selectedSeats +
-                            " (" + seatCount + " seats - $" + String.format("%.2f", seatTotalPrice) + ")" +
-                            "\n\nSnacks:\n" + snacksDetails,
+                    bookingDetails,
                     grandTotal,
                     movieName,
-                    selectedSeats
+                    selectedSeats,
+                    snacksDetailsStr,
+                    snacksTotal
             );
 
             requireActivity().getSupportFragmentManager()

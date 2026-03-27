@@ -12,7 +12,6 @@ import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
@@ -22,7 +21,8 @@ public class SeatSelectionFragment extends Fragment {
 
     private Movie movie;
     private List<String> selectedSeats = new ArrayList<>();
-    private double seatPrice = 12.99; // Base price per seat
+    private double seatPrice = 12.99;
+    private GridLayout seatGrid;
 
     public static SeatSelectionFragment newInstance(Movie movie) {
         SeatSelectionFragment fragment = new SeatSelectionFragment();
@@ -40,7 +40,7 @@ public class SeatSelectionFragment extends Fragment {
         View view = inflater.inflate(R.layout.activity_seat_booking, container, false);
 
         TextView tvMovieName = view.findViewById(R.id.tvMovieName);
-        GridLayout seatGrid = view.findViewById(R.id.seatGrid);
+        seatGrid = view.findViewById(R.id.seatGrid);
         Button btnBook = view.findViewById(R.id.btnBookSeats);
         Button btnSnacks = view.findViewById(R.id.btnProceedToSnacks);
         ImageView btnBack = view.findViewById(R.id.btnBack);
@@ -57,9 +57,13 @@ public class SeatSelectionFragment extends Fragment {
         );
 
         if (isComingSoon) {
-            // DISABLE SEATS
+            // Disable all seats
             for (int i = 0; i < seatGrid.getChildCount(); i++) {
-                seatGrid.getChildAt(i).setClickable(false);
+                View child = seatGrid.getChildAt(i);
+                if (child instanceof TextView) {
+                    child.setClickable(false);
+                    child.setEnabled(false);
+                }
             }
 
             btnBook.setText("Coming Soon");
@@ -72,10 +76,9 @@ public class SeatSelectionFragment extends Fragment {
             });
 
         } else {
-            // NORMAL FLOW - Setup seat clicks
-            setupSeatClicks(seatGrid);
+            // Setup seat clicks
+            setupSeatClicks();
 
-            // Book Seats button - goes directly to Ticket Summary
             btnBook.setOnClickListener(v -> {
                 if (selectedSeats.isEmpty()) {
                     Toast.makeText(getContext(), "Please select at least one seat", Toast.LENGTH_SHORT).show();
@@ -83,12 +86,19 @@ public class SeatSelectionFragment extends Fragment {
                     double totalSeatPrice = selectedSeats.size() * seatPrice;
                     String seatsFormatted = formatSelectedSeats();
 
-                    // Go directly to Ticket Summary
+                    String bookingDetails = "Movie: " + name +
+                            "\n\nSeats: " + seatsFormatted +
+                            "\nSeats Total: $" + String.format("%.2f", totalSeatPrice) +
+                            "\n\nSnacks: No snacks selected" +
+                            "\n\nTotal Amount: $" + String.format("%.2f", totalSeatPrice);
+
                     TicketSummaryFragment fragment = TicketSummaryFragment.newInstance(
-                            "Movie: " + name + "\nSeats: " + seatsFormatted + "\n\nNo snacks selected",
+                            bookingDetails,
                             totalSeatPrice,
                             name,
-                            seatsFormatted
+                            seatsFormatted,
+                            "No snacks selected",
+                            0
                     );
 
                     requireActivity().getSupportFragmentManager()
@@ -99,7 +109,6 @@ public class SeatSelectionFragment extends Fragment {
                 }
             });
 
-            // Proceed to Snacks button - passes seat info to snacks fragment
             btnSnacks.setOnClickListener(v -> {
                 if (selectedSeats.isEmpty()) {
                     Toast.makeText(getContext(), "Please select at least one seat first", Toast.LENGTH_SHORT).show();
@@ -107,7 +116,6 @@ public class SeatSelectionFragment extends Fragment {
                     double totalSeatPrice = selectedSeats.size() * seatPrice;
                     String seatsFormatted = formatSelectedSeats();
 
-                    // Create SnacksFragment with seat information
                     SnacksFragment snacksFragment = SnacksFragment.newInstance(
                             name,
                             seatsFormatted,
@@ -138,7 +146,7 @@ public class SeatSelectionFragment extends Fragment {
         return formatted.toString();
     }
 
-    private void setupSeatClicks(GridLayout seatGrid) {
+    private void setupSeatClicks() {
         for (int i = 0; i < seatGrid.getChildCount(); i++) {
             View seatView = seatGrid.getChildAt(i);
 
@@ -146,30 +154,31 @@ public class SeatSelectionFragment extends Fragment {
                 TextView seat = (TextView) seatView;
                 String seatTag = (String) seat.getTag();
 
-                // Skip if seat is already booked
-                if ("booked".equals(seatTag)) {
+                // Skip if seat is already booked (check by tag or background)
+                if (seatTag == null) continue;
+
+                // Check if seat is booked by checking if it has booked background
+                // You can also store a separate "booked" tag
+                if (seat.getBackground().getConstantState() ==
+                        getResources().getDrawable(R.drawable.bg_seat_booked).getConstantState()) {
                     seat.setClickable(false);
-                    seat.setAlpha(0.6f);
+                    seat.setEnabled(false);
                     continue;
                 }
 
                 // Make available seats clickable
                 seat.setOnClickListener(v -> {
                     TextView clickedSeat = (TextView) v;
-                    String seatNum = clickedSeat.getText().toString();
+                    String seatNum = (String) clickedSeat.getTag(); // Get seat number from tag
 
                     if (selectedSeats.contains(seatNum)) {
                         // Deselect seat
                         selectedSeats.remove(seatNum);
-                        clickedSeat.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.grayBg));
-                        clickedSeat.setTextColor(ContextCompat.getColor(getContext(), R.color.white));
-                        clickedSeat.setTag("available");
+                        clickedSeat.setBackgroundResource(R.drawable.bg_seat_available);
                     } else {
                         // Select seat
                         selectedSeats.add(seatNum);
-                        clickedSeat.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.green));
-                        clickedSeat.setTextColor(ContextCompat.getColor(getContext(), android.R.color.black));
-                        clickedSeat.setTag("selected");
+                        clickedSeat.setBackgroundResource(R.drawable.bg_seat_selected);
                     }
                 });
             }
