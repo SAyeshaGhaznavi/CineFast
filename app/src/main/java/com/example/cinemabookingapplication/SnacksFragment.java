@@ -12,14 +12,42 @@ import java.util.List;
 public class SnacksFragment extends Fragment {
 
     List<Snack> snackList;
+    private String movieName;
+    private String selectedSeats;
+    private int seatCount;
+    private double seatTotalPrice;
+
+    public static SnacksFragment newInstance(String movieName, String selectedSeats, int seatCount, double seatTotalPrice) {
+        SnacksFragment fragment = new SnacksFragment();
+        Bundle args = new Bundle();
+        args.putString("movieName", movieName);
+        args.putString("selectedSeats", selectedSeats);
+        args.putInt("seatCount", seatCount);
+        args.putDouble("seatTotalPrice", seatTotalPrice);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_snacks, container, false);
+
+        // Get arguments
+        if (getArguments() != null) {
+            movieName = getArguments().getString("movieName");
+            selectedSeats = getArguments().getString("selectedSeats");
+            seatCount = getArguments().getInt("seatCount");
+            seatTotalPrice = getArguments().getDouble("seatTotalPrice");
+        }
 
         ListView listView = view.findViewById(R.id.snackListView);
         Button btnConfirm = view.findViewById(R.id.btnConfirm);
+
+        // Optional: Add a TextView to show selected seats
+        TextView tvSelectedSeats = view.findViewById(R.id.tvSelectedSeats);
+        if (tvSelectedSeats != null) {
+            tvSelectedSeats.setText("Selected Seats: " + selectedSeats + " (" + seatCount + " seats)");
+        }
 
         snackList = new ArrayList<>();
 
@@ -32,19 +60,38 @@ public class SnacksFragment extends Fragment {
         listView.setAdapter(adapter);
 
         btnConfirm.setOnClickListener(v -> {
-
-            double total = 0;
-            StringBuilder summary = new StringBuilder();
+            double snacksTotal = 0;
+            StringBuilder snacksSummary = new StringBuilder();
 
             for (Snack snack : snackList) {
                 if (snack.quantity > 0) {
-                    total += snack.quantity * snack.price;
-                    summary.append(snack.name).append(" x").append(snack.quantity).append("\n");
+                    snacksTotal += snack.quantity * snack.price;
+                    snacksSummary.append(snack.name).append(" x").append(snack.quantity).append(" = $")
+                            .append(String.format("%.2f", snack.quantity * snack.price)).append("\n");
                 }
             }
 
-            TicketSummaryFragment fragment =
-                    TicketSummaryFragment.newInstance(summary.toString(), total);
+            // Calculate grand total (seats + snacks)
+            double grandTotal = seatTotalPrice + snacksTotal;
+
+            // Create snacks summary string
+            String snacksDetails;
+            if (snacksSummary.length() > 0) {
+                snacksDetails = snacksSummary.toString();
+            } else {
+                snacksDetails = "No snacks selected";
+            }
+
+            // Pass to Ticket Summary
+            TicketSummaryFragment fragment = TicketSummaryFragment.newInstance(
+                    "Movie: " + movieName +
+                            "\nSeats: " + selectedSeats +
+                            " (" + seatCount + " seats - $" + String.format("%.2f", seatTotalPrice) + ")" +
+                            "\n\nSnacks:\n" + snacksDetails,
+                    grandTotal,
+                    movieName,
+                    selectedSeats
+            );
 
             requireActivity().getSupportFragmentManager()
                     .beginTransaction()

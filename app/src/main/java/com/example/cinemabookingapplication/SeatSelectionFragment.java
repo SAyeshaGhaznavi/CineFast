@@ -2,7 +2,6 @@ package com.example.cinemabookingapplication;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -23,6 +22,7 @@ public class SeatSelectionFragment extends Fragment {
 
     private Movie movie;
     private List<String> selectedSeats = new ArrayList<>();
+    private double seatPrice = 12.99; // Base price per seat
 
     public static SeatSelectionFragment newInstance(Movie movie) {
         SeatSelectionFragment fragment = new SeatSelectionFragment();
@@ -75,20 +75,67 @@ public class SeatSelectionFragment extends Fragment {
             // NORMAL FLOW - Setup seat clicks
             setupSeatClicks(seatGrid);
 
+            // Book Seats button - goes directly to Ticket Summary
             btnBook.setOnClickListener(v -> {
                 if (selectedSeats.isEmpty()) {
                     Toast.makeText(getContext(), "Please select at least one seat", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(getContext(), "Booking Confirmed for " + selectedSeats.size() + " seats!", Toast.LENGTH_SHORT).show();
+                    double totalSeatPrice = selectedSeats.size() * seatPrice;
+                    String seatsFormatted = formatSelectedSeats();
+
+                    // Go directly to Ticket Summary
+                    TicketSummaryFragment fragment = TicketSummaryFragment.newInstance(
+                            "Movie: " + name + "\nSeats: " + seatsFormatted + "\n\nNo snacks selected",
+                            totalSeatPrice,
+                            name,
+                            seatsFormatted
+                    );
+
+                    requireActivity().getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragment_container, fragment)
+                            .addToBackStack(null)
+                            .commit();
                 }
             });
 
-            btnSnacks.setOnClickListener(v ->
-                    Toast.makeText(getContext(), "Go to Snacks (next step)", Toast.LENGTH_SHORT).show()
-            );
+            // Proceed to Snacks button - passes seat info to snacks fragment
+            btnSnacks.setOnClickListener(v -> {
+                if (selectedSeats.isEmpty()) {
+                    Toast.makeText(getContext(), "Please select at least one seat first", Toast.LENGTH_SHORT).show();
+                } else {
+                    double totalSeatPrice = selectedSeats.size() * seatPrice;
+                    String seatsFormatted = formatSelectedSeats();
+
+                    // Create SnacksFragment with seat information
+                    SnacksFragment snacksFragment = SnacksFragment.newInstance(
+                            name,
+                            seatsFormatted,
+                            selectedSeats.size(),
+                            totalSeatPrice
+                    );
+
+                    requireActivity().getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragment_container, snacksFragment)
+                            .addToBackStack(null)
+                            .commit();
+                }
+            });
         }
 
         return view;
+    }
+
+    private String formatSelectedSeats() {
+        StringBuilder formatted = new StringBuilder();
+        for (int i = 0; i < selectedSeats.size(); i++) {
+            formatted.append(selectedSeats.get(i));
+            if (i < selectedSeats.size() - 1) {
+                formatted.append(", ");
+            }
+        }
+        return formatted.toString();
     }
 
     private void setupSeatClicks(GridLayout seatGrid) {
