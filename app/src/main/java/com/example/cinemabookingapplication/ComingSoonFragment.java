@@ -27,38 +27,49 @@ public class ComingSoonFragment extends Fragment {
 
         ArrayList<Movie> movieList = new ArrayList<>();
 
-        // Coming soon movies - same for both Today and Tomorrow
-        movieList.add(new Movie(
+        // Coming soon movies - NO BOOKED SEATS (all seats available)
+        // isComingSoon = true ensures no red seats appear
+
+        // Dune Part 3
+        Movie dune3 = new Movie(
                 "Dune Part 3",
                 "Sci-Fi / 190 min",
                 "https://youtu.be/3aAvQxtvKiA?si=4_m0v6cK2Pqqwu8Z",
                 R.drawable.dune3,
-                true
-        ));
+                true  // Coming Soon = no booked seats
+        );
+        // No booked seats added for coming soon movies
+        movieList.add(dune3);
 
-        movieList.add(new Movie(
+        // The Odyssey
+        Movie odyssey = new Movie(
                 "The Odyssey",
                 "Action / 169 min",
                 "https://youtu.be/l54pzz3-Yl8?si=NTWo-dMcL8Vt3s1S",
                 R.drawable.odyssey,
                 true
-        ));
+        );
+        movieList.add(odyssey);
 
-        movieList.add(new Movie(
+        // The Drama
+        Movie drama = new Movie(
                 "The Drama",
                 "Drama / 164 min",
                 "https://youtu.be/t95Mng97rkI?si=-ulFUd1Tj2mja39I",
                 R.drawable.thedrama,
                 true
-        ));
+        );
+        movieList.add(drama);
 
-        movieList.add(new Movie(
+        // Dracula
+        Movie dracula = new Movie(
                 "Dracula",
                 "Sci-Fi / 141 min",
                 "https://youtu.be/5GK_cFZ5XgE?si=LV4gUCMUinN_RbeK",
                 R.drawable.dracula,
                 true
-        ));
+        );
+        movieList.add(dracula);
 
         MovieAdapter adapter = new MovieAdapter(
                 movieList,

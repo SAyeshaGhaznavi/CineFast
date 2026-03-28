@@ -3,28 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#111111">
+    android:background="#111111"
+    android:orientation="vertical">
 
     <!-- TOP HEADER SECTION -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:background="@drawable/bg_header_gradient"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp"
         android:paddingTop="40dp"
-        android:paddingBottom="16dp"
-        android:paddingHorizontal="20dp">
+        android:paddingBottom="16dp">
 
         <!-- Back Button -->
         <ImageView
             android:id="@+id/btnBack"
             android:layout_width="36dp"
             android:layout_height="36dp"
-            android:src="@drawable/ic_back"
+            android:layout_marginBottom="12dp"
             android:background="@drawable/bg_back_button"
             android:padding="8dp"
-            android:layout_marginBottom="12dp"
+            android:src="@drawable/ic_back"
             app:tint="#FFFFFF" />
 
         <!-- Movie Name -->
@@ -32,204 +32,212 @@
             android:id="@+id/tvMovieName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:gravity="center"
             android:textColor="#FFFFFF"
             android:textSize="26sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="10dp"/>
+            android:textStyle="bold" />
 
         <!-- Badges Row -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="16dp"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="+13"
-                android:textColor="#FFFFFF"
-                android:textSize="11sp"
-                android:textStyle="bold"
+                android:layout_marginEnd="6dp"
                 android:background="@drawable/bg_badge_green"
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="3dp"
-                android:layout_marginEnd="6dp"/>
+                android:text="+13"
+                android:textColor="#FFFFFF"
+                android:textSize="11sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="EN"
-                android:textColor="#FFFFFF"
-                android:textSize="11sp"
+                android:layout_marginEnd="6dp"
                 android:background="@drawable/bg_badge_dark"
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="3dp"
-                android:layout_marginEnd="6dp"/>
+                android:text="EN"
+                android:textColor="#FFFFFF"
+                android:textSize="11sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ScreenX"
-                android:textColor="#FFFFFF"
-                android:textSize="11sp"
                 android:background="@drawable/bg_badge_dark"
                 android:paddingHorizontal="8dp"
-                android:paddingVertical="3dp"/>
+                android:paddingVertical="3dp"
+                android:text="ScreenX"
+                android:textColor="#FFFFFF"
+                android:textSize="11sp" />
         </LinearLayout>
 
         <!-- Info Row - CENTERED -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:gravity="center"
+            android:orientation="horizontal"
             android:weightSum="4">
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <ImageView
                         android:layout_width="12dp"
                         android:layout_height="12dp"
-                        android:src="@drawable/round_add_location_24"
                         android:layout_gravity="center_vertical"
                         android:layout_marginEnd="3dp"
-                        app:tint="#AAAAAA"/>
+                        android:src="@drawable/round_add_location_24"
+                        app:tint="#AAAAAA" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Theater"
                         android:textColor="#AAAAAA"
-                        android:textSize="11sp"/>
+                        android:textSize="11sp" />
                 </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
                     android:text="Stars (90°Mall)"
                     android:textColor="#FFFFFF"
                     android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="2dp"/>
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <ImageView
                         android:layout_width="12dp"
                         android:layout_height="12dp"
-                        android:src="@drawable/round_camera_roll_24"
                         android:layout_gravity="center_vertical"
                         android:layout_marginEnd="3dp"
-                        app:tint="#AAAAAA"/>
+                        android:src="@drawable/round_camera_roll_24"
+                        app:tint="#AAAAAA" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Hall"
                         android:textColor="#AAAAAA"
-                        android:textSize="11sp"/>
+                        android:textSize="11sp" />
                 </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
                     android:text="1st"
                     android:textColor="#FFFFFF"
                     android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="2dp"/>
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <ImageView
                         android:layout_width="12dp"
                         android:layout_height="12dp"
-                        android:src="@drawable/baseline_calendar_today_24"
                         android:layout_gravity="center_vertical"
                         android:layout_marginEnd="3dp"
-                        app:tint="#AAAAAA"/>
+                        android:src="@drawable/baseline_calendar_today_24"
+                        app:tint="#AAAAAA" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Date"
                         android:textColor="#AAAAAA"
-                        android:textSize="11sp"/>
+                        android:textSize="11sp" />
                 </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
                     android:text="13.04.2025"
                     android:textColor="#FFFFFF"
                     android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="2dp"/>
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <ImageView
                         android:layout_width="12dp"
                         android:layout_height="12dp"
-                        android:src="@drawable/baseline_access_time_filled_24"
                         android:layout_gravity="center_vertical"
                         android:layout_marginEnd="3dp"
-                        app:tint="#AAAAAA"/>
+                        android:src="@drawable/baseline_access_time_filled_24"
+                        app:tint="#AAAAAA" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Time"
                         android:textColor="#AAAAAA"
-                        android:textSize="11sp"/>
+                        android:textSize="11sp" />
                 </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
                     android:text="22:15"
                     android:textColor="#FFFFFF"
                     android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="2dp"/>
+                    android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
@@ -239,15 +247,15 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="vertical"
-        android:background="#111111">
+        android:background="#111111"
+        android:orientation="vertical">
 
         <!-- Screen arc indicator - CENTERED -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:gravity="center_horizontal"
+            android:orientation="vertical"
             android:paddingTop="20dp"
             android:paddingBottom="16dp">
 
@@ -262,13 +270,13 @@
             android:id="@+id/seatGrid"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_gravity="center_horizontal"
+            android:layout_gravity="center|center_horizontal|center_vertical"
             android:layout_weight="1"
             android:alignmentMode="alignMargins"
             android:columnCount="9"
             android:columnOrderPreserved="true"
-            android:paddingLeft="40dp"
-            android:paddingTop="20dp"
+            android:foregroundGravity="center_horizontal"
+            android:paddingLeft="4dp"
             android:rowCount="5">
 
             <!-- ROW A: 4 seats, gap, 4 seats -->
@@ -671,64 +679,70 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:gravity="center"
+            android:orientation="horizontal"
             android:paddingVertical="16dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_marginEnd="24dp"
                 android:gravity="center_vertical"
-                android:layout_marginEnd="24dp">
+                android:orientation="horizontal">
+
                 <View
                     android:layout_width="10dp"
                     android:layout_height="10dp"
-                    android:background="@drawable/bg_legend_dot_booked"
-                    android:layout_marginEnd="6dp"/>
+                    android:layout_marginEnd="6dp"
+                    android:background="@drawable/bg_badge_red" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Booked"
                     android:textColor="#AAAAAA"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_marginEnd="24dp"
                 android:gravity="center_vertical"
-                android:layout_marginEnd="24dp">
+                android:orientation="horizontal">
+
                 <View
                     android:layout_width="10dp"
                     android:layout_height="10dp"
-                    android:background="@drawable/bg_legend_dot_yours"
-                    android:layout_marginEnd="6dp"/>
+                    android:layout_marginEnd="6dp"
+                    android:background="@drawable/bg_badge_green" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Yours"
                     android:textColor="#AAAAAA"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
                 <View
                     android:layout_width="10dp"
                     android:layout_height="10dp"
-                    android:background="@drawable/bg_legend_dot_available"
-                    android:layout_marginEnd="6dp"/>
+                    android:layout_marginEnd="6dp"
+                    android:background="@drawable/bg_legend_dot_available" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Available"
                     android:textColor="#AAAAAA"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
@@ -737,10 +751,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#111111"
         android:orientation="horizontal"
         android:paddingHorizontal="16dp"
         android:paddingVertical="16dp"
-        android:background="#111111">
+        android:weightSum="2"
+        android:gravity="center_vertical">
 
         <Button
             android:id="@+id/btnBookSeats"
@@ -749,12 +765,13 @@
             android:layout_weight="1"
             android:layout_marginEnd="8dp"
             android:backgroundTint="#E8352A"
+            android:stateListAnimator="@null"
             android:text="Book Seats"
             android:textColor="#FFFFFF"
             android:textSize="14sp"
             android:textStyle="bold"
-            android:stateListAnimator="@null"
-            app:cornerRadius="26dp"/>
+            android:gravity="center"
+            app:cornerRadius="26dp" />
 
         <Button
             android:id="@+id/btnProceedToSnacks"
@@ -763,12 +780,14 @@
             android:layout_weight="1"
             android:layout_marginStart="8dp"
             android:backgroundTint="#FFFFFF"
+            android:stateListAnimator="@null"
             android:text="Proceed to Snacks"
             android:textColor="#111111"
             android:textSize="13sp"
             android:textStyle="bold"
-            android:stateListAnimator="@null"
-            app:cornerRadius="26dp"/>
+            android:gravity="center"
+            app:cornerRadius="26dp" />
+
     </LinearLayout>
 
 </LinearLayout>

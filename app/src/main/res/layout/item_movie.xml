@@ -51,26 +51,40 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="2">
 
                 <Button
                     android:id="@+id/btnBookSeats"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:layout_weight="1"
-                    android:text="Book Seats"
+                    android:layout_marginEnd="8dp"
                     android:backgroundTint="@color/red"
-                    android:textColor="@color/white"/>
+                    android:text="Book Seats"
+                    android:textColor="@color/white"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:paddingHorizontal="8dp"
+                    android:singleLine="true"
+                    app:cornerRadius="24dp" />
 
                 <Button
                     android:id="@+id/btnTrailer"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
+                    android:layout_height="48dp"
                     android:layout_weight="1"
+                    android:layout_marginStart="8dp"
                     android:backgroundTint="@color/white"
-                    android:text="Trailer"
-                    android:textColor="@color/black" />
+                    android:text="Watch Trailer"
+                    android:textColor="@color/black"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:paddingHorizontal="8dp"
+                    android:singleLine="true"
+                    app:cornerRadius="24dp" />
             </LinearLayout>
 
         </LinearLayout>

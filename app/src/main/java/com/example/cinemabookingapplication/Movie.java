@@ -1,11 +1,15 @@
 package com.example.cinemabookingapplication;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Movie {
     public String name;
     public String details;
     public String trailer;
-    public int posterResId; // Change from R.drawable.poster to this
+    public int posterResId;
     public boolean isComingSoon;
+    public List<String> bookedSeats; // Store booked seats for each movie
 
     public Movie(String name, String details, String trailer, int posterResId, boolean isComingSoon) {
         this.name = name;
@@ -13,5 +17,46 @@ public class Movie {
         this.trailer = trailer;
         this.posterResId = posterResId;
         this.isComingSoon = isComingSoon;
+        this.bookedSeats = new ArrayList<>();
+        initializeBookedSeats(); // Initialize based on movie type
+    }
+
+    private void initializeBookedSeats() {
+        if (isComingSoon) {
+            // Coming Soon movies: No booked seats
+            bookedSeats.clear();
+        } else {
+            // Now Showing movies: Add pre-booked seats
+            // You can customize this per movie
+            bookedSeats.add("B1");
+            bookedSeats.add("B6");
+            bookedSeats.add("B7");
+            bookedSeats.add("D2");
+            bookedSeats.add("D3");
+            bookedSeats.add("E6");
+            bookedSeats.add("E7");
+
+            // Add different booked seats for different movies
+            if (name.equals("The Dark Knight")) {
+                bookedSeats.add("C1");
+                bookedSeats.add("C2");
+            } else if (name.equals("Inception")) {
+                bookedSeats.add("A1");
+                bookedSeats.add("A8");
+            } else if (name.equals("Interstellar")) {
+                bookedSeats.add("E1");
+                bookedSeats.add("E8");
+            }
+        }
+    }
+
+    // Method to update booked seats (when user books)
+    public void addBookedSeat(String seat) {
+        bookedSeats.add(seat);
+    }
+
+    // Check if a seat is booked
+    public boolean isSeatBooked(String seat) {
+        return bookedSeats.contains(seat);
     }
 }

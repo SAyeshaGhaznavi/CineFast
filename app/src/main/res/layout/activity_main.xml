@@ -43,5 +43,6 @@
         android:padding="10dp"
         android:paddingBottom="15dp"
         android:text="@string/homepage_button"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:textColor="@color/white"/>
 </LinearLayout>
