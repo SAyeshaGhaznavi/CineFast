@@ -9,7 +9,7 @@ public class Movie {
     public String trailer;
     public int posterResId;
     public boolean isComingSoon;
-    public List<String> bookedSeats; // Store booked seats for each movie
+    public List<String> bookedSeats;
 
     public Movie(String name, String details, String trailer, int posterResId, boolean isComingSoon) {
         this.name = name;
@@ -18,7 +18,7 @@ public class Movie {
         this.posterResId = posterResId;
         this.isComingSoon = isComingSoon;
         this.bookedSeats = new ArrayList<>();
-        initializeBookedSeats(); // Initialize based on movie type
+        initializeBookedSeats();
     }
 
     private void initializeBookedSeats() {
@@ -26,8 +26,6 @@ public class Movie {
             // Coming Soon movies: No booked seats
             bookedSeats.clear();
         } else {
-            // Now Showing movies: Add pre-booked seats
-            // You can customize this per movie
             bookedSeats.add("B1");
             bookedSeats.add("B6");
             bookedSeats.add("B7");
@@ -36,7 +34,6 @@ public class Movie {
             bookedSeats.add("E6");
             bookedSeats.add("E7");
 
-            // Add different booked seats for different movies
             if (name.equals("The Dark Knight")) {
                 bookedSeats.add("C1");
                 bookedSeats.add("C2");

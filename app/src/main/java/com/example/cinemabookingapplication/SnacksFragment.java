@@ -16,7 +16,7 @@ public class SnacksFragment extends Fragment {
     private String selectedSeats;
     private int seatCount;
     private double seatTotalPrice;
-    private int moviePosterResId; // Add this field
+    private int moviePosterResId;
 
     public static SnacksFragment newInstance(String movieName, String selectedSeats, int seatCount, double seatTotalPrice, int moviePosterResId) {
         SnacksFragment fragment = new SnacksFragment();
@@ -25,7 +25,7 @@ public class SnacksFragment extends Fragment {
         args.putString("selectedSeats", selectedSeats);
         args.putInt("seatCount", seatCount);
         args.putDouble("seatTotalPrice", seatTotalPrice);
-        args.putInt("moviePosterResId", moviePosterResId); // Add this
+        args.putInt("moviePosterResId", moviePosterResId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -100,7 +100,7 @@ public class SnacksFragment extends Fragment {
                     selectedSeats,
                     snacksDetailsStr,
                     snacksTotal,
-                    moviePosterResId // Pass the poster here
+                    moviePosterResId
             );
 
             requireActivity().getSupportFragmentManager()

@@ -108,7 +108,6 @@ public class SeatSelectionFragment extends Fragment {
                 startActivity(intent);
             });
         } else {
-            // Now Showing: Setup seat clicks with dynamic booked seats
             setupSeatClicks(bookedSeatsList);
 
             btnBook.setOnClickListener(v -> {
