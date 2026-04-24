@@ -75,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
                 etPassword.setError("Enter password");
                 return;
             }
-            if(password.length() < 8)
+            if(password.length() < 6)
             {
                 etPassword.setError("Enter minimum 8 digits password");
                 return;

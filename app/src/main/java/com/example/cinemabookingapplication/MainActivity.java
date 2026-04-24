@@ -3,6 +3,7 @@ package com.example.cinemabookingapplication;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import com.google.firebase.FirebaseApp;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.splashscreen.SplashScreen;
@@ -16,6 +17,8 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        FirebaseApp.initializeApp(this);
 
         Button btn = findViewById(R.id.btnGetStarted);
 

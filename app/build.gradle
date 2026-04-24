@@ -52,4 +52,5 @@ dependencies {
     implementation libs.core.splashscreen
     implementation libs.cardview
     implementation libs.material.v1110
+    implementation libs.firebase.database
 }

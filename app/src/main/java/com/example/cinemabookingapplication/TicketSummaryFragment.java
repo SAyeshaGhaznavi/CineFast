@@ -3,11 +3,16 @@ package com.example.cinemabookingapplication;
 import android.content.*;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.*;
 import android.widget.*;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class TicketSummaryFragment extends Fragment {
 
@@ -100,6 +105,9 @@ public class TicketSummaryFragment extends Fragment {
         editor.putString("total_amount", String.format("%.2f", total));
         editor.apply();
 
+        // Save booking to Firebase
+        saveBookingToFirebase();
+
         // Share via WhatsApp button
         btnShareWhatsApp.setOnClickListener(v -> shareViaWhatsApp());
 
@@ -179,6 +187,55 @@ public class TicketSummaryFragment extends Fragment {
                 })
                 .setNegativeButton("Cancel", null)
                 .show();
+    }
+
+    private void saveBookingToFirebase() {
+        // Check if user is logged in
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+            Log.d("TicketSummary", "User not logged in, skipping Firebase save");
+            return;
+        }
+
+        try {
+            String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            DatabaseReference bookingsRef = FirebaseDatabase.getInstance()
+                    .getReference("bookings")
+                    .child(userId)
+                    .push(); // Auto-generate unique ID
+
+            String date = "13.04.2025";
+            String time = "22:15";
+
+            // Make sure selectedSeats is not null
+            String seatsToSave = selectedSeats != null ? selectedSeats : "No seats";
+            String snacksToSave = snacksDetails != null ? snacksDetails : "No snacks selected";
+            int ticketCount = seatsToSave.split(",").length;
+
+            Booking booking = new Booking(
+                    bookingsRef.getKey(),
+                    movieName,
+                    String.valueOf(moviePosterResId),
+                    date,
+                    time,
+                    ticketCount,
+                    total,
+                    System.currentTimeMillis(),
+                    seatsToSave,
+                    snacksToSave
+            );
+
+            bookingsRef.setValue(booking)
+                    .addOnSuccessListener(aVoid -> {
+                        Log.d("TicketSummary", "Booking saved to Firebase successfully!");
+                        Toast.makeText(getContext(), "Booking saved!", Toast.LENGTH_SHORT).show();
+                    })
+                    .addOnFailureListener(e -> {
+                        Log.e("TicketSummary", "Failed to save booking: " + e.getMessage());
+                        Toast.makeText(getContext(), "Failed to save booking", Toast.LENGTH_SHORT).show();
+                    });
+        } catch (Exception e) {
+            Log.e("TicketSummary", "Error saving to Firebase: " + e.getMessage());
+        }
     }
 
     private String getCurrentDate() {
