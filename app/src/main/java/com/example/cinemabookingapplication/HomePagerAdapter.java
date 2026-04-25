@@ -23,10 +23,8 @@ public class HomePagerAdapter extends FragmentStateAdapter {
     @Override
     public Fragment createFragment(int position) {
         if (position == 0) {
-            // Now Showing tab - passes date to show different movies
             return NowShowingFragment.newInstance(selectedDate);
         } else {
-            // Coming Soon tab - no date parameter, always shows same movies
             return ComingSoonFragment.newInstance();
         }
     }
@@ -38,7 +36,7 @@ public class HomePagerAdapter extends FragmentStateAdapter {
 
     @Override
     public long getItemId(int position) {
-        return position; // Return position as ID to force refresh
+        return position;
     }
 
     @Override

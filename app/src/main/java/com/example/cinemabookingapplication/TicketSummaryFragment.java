@@ -162,7 +162,6 @@ public class TicketSummaryFragment extends Fragment {
                 "⏰ *Time:* " + getCurrentTime() + "\n\n" +
                 "Thank you for choosing Cinema FAST! 🎉";
 
-        // Try to send via WhatsApp
         try {
             Intent intent = new Intent(Intent.ACTION_SEND);
             intent.setType("text/plain");
@@ -207,10 +206,9 @@ public class TicketSummaryFragment extends Fragment {
         String bookingId = bookingsRef.getKey();
         int ticketCount = selectedSeats.split(",").length;
 
-        // Get timestamp from arguments
+        String date = getArguments().getString("date", "");
+        String time = getArguments().getString("time", "");
         long timestamp = getArguments().getLong("timestamp", System.currentTimeMillis());
-        String date = getArguments().getString("date", "13.04.2025");
-        String time = getArguments().getString("time", "22:15");
 
         Booking booking = new Booking(
                 bookingId,
@@ -225,7 +223,13 @@ public class TicketSummaryFragment extends Fragment {
                 snacksDetails != null ? snacksDetails : "No snacks selected"
         );
 
-        bookingsRef.setValue(booking);
+        bookingsRef.setValue(booking)
+                .addOnSuccessListener(aVoid -> {
+                    Log.d("TicketSummary", "Booking saved to Firebase successfully!");
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("TicketSummary", "Failed to save booking", e);
+                });
     }
 
     private String getCurrentDate() {

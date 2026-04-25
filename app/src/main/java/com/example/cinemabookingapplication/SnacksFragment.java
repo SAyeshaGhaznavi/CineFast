@@ -20,6 +20,7 @@ public class SnacksFragment extends Fragment {
     private String bookingDate;
     private String bookingTime;
     private long timestamp;
+    private DatabaseHelper databaseHelper;
 
     public static SnacksFragment newInstance(String movieName, String selectedSeats, int seatCount,
                                              double seatTotalPrice, int moviePosterResId,
@@ -53,6 +54,8 @@ public class SnacksFragment extends Fragment {
             timestamp = getArguments().getLong("timestamp");
         }
 
+        databaseHelper = new DatabaseHelper(getContext());
+
         ListView listView = view.findViewById(R.id.snackListView);
         Button btnConfirm = view.findViewById(R.id.btnConfirm);
 
@@ -61,11 +64,7 @@ public class SnacksFragment extends Fragment {
             tvSelectedSeats.setText("Selected Seats: " + selectedSeats + " (" + seatCount + " seats - $" + String.format("%.2f", seatTotalPrice) + ")");
         }
 
-        snackList = new ArrayList<>();
-        snackList.add(new Snack("Popcorn", 8.99, R.drawable.popcorn));
-        snackList.add(new Snack("Nachos", 7.99, R.drawable.nachos));
-        snackList.add(new Snack("Drink", 5.99, R.drawable.drink));
-        snackList.add(new Snack("Candy", 6.99, R.drawable.candy));
+        snackList = databaseHelper.getAllSnacks(getContext());
 
         SnackAdapter adapter = new SnackAdapter(getContext(), snackList);
         listView.setAdapter(adapter);

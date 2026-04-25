@@ -244,7 +244,6 @@
         </LinearLayout>
     </LinearLayout>
 
-    <!-- MAIN DARK SECTION -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -252,7 +251,6 @@
         android:background="#111111"
         android:orientation="vertical">
 
-        <!-- Screen arc indicator - CENTERED -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -267,417 +265,420 @@
                 android:src="@drawable/ic_screen_arc" />
         </LinearLayout>
 
-        <!-- Seat Grid - CENTERED with 8 columns (4 seats, gap, 4 seats) -->
-        <GridLayout
-            android:id="@+id/seatGrid"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_gravity="center|center_horizontal|center_vertical"
             android:layout_weight="1"
-            android:alignmentMode="alignMargins"
-            android:columnCount="9"
-            android:columnOrderPreserved="true"
-            android:foregroundGravity="center_horizontal"
-            android:paddingLeft="4dp"
-            android:rowCount="5">
+            android:gravity="center"
+            android:orientation="vertical">
 
-            <!-- ROW A: 4 seats, gap, 4 seats -->
-            <TextView
-                android:id="@+id/seat_a1"
-                style="@style/SeatStyle"
-                android:layout_row="0"
-                android:layout_column="0"
-                android:background="@drawable/bg_seat_available"
-                android:tag="A1"
-                android:text="" />
+            <!-- Seat Grid - CENTERED -->
+            <GridLayout
+                android:id="@+id/seatGrid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alignmentMode="alignMargins"
+                android:columnCount="9"
+                android:columnOrderPreserved="true"
+                android:rowCount="5">
 
-            <TextView
-                android:id="@+id/seat_a2"
-                style="@style/SeatStyle"
-                android:layout_row="0"
-                android:layout_column="1"
-                android:background="@drawable/bg_seat_available"
-                android:tag="A2"
-                android:text="" />
+                <!-- ROW A: 4 seats, gap, 4 seats -->
+                <TextView
+                    android:id="@+id/seat_a1"
+                    style="@style/SeatStyle"
+                    android:layout_row="0"
+                    android:layout_column="0"
+                    android:background="@drawable/bg_seat_available"
+                    android:tag="A1"
+                    android:text="" />
 
-            <TextView
-                android:id="@+id/seat_a3"
-                style="@style/SeatStyle"
-                android:layout_row="0"
-                android:layout_column="2"
-                android:background="@drawable/bg_seat_available"
-                android:tag="A3"
-                android:text="" />
+                <TextView
+                    android:id="@+id/seat_a2"
+                    style="@style/SeatStyle"
+                    android:layout_row="0"
+                    android:layout_column="1"
+                    android:background="@drawable/bg_seat_available"
+                    android:tag="A2"
+                    android:text="" />
 
-            <TextView
-                android:id="@+id/seat_a4"
-                style="@style/SeatStyle"
-                android:layout_row="0"
-                android:layout_column="3"
-                android:background="@drawable/bg_seat_available"
-                android:tag="A4"
-                android:text="" />
-            <!-- AISLE GAP col 4 -->
-            <Space
-                android:layout_width="24dp"
-                android:layout_height="0dp"
-                android:layout_row="0"
-                android:layout_column="4" />
+                <TextView
+                    android:id="@+id/seat_a3"
+                    style="@style/SeatStyle"
+                    android:layout_row="0"
+                    android:layout_column="2"
+                    android:background="@drawable/bg_seat_available"
+                    android:tag="A3"
+                    android:text="" />
 
-            <TextView
-                android:id="@+id/seat_a5"
-                style="@style/SeatStyle"
-                android:layout_row="0"
-                android:layout_column="5"
-                android:background="@drawable/bg_seat_available"
-                android:tag="A5"
-                android:text="" />
+                <TextView
+                    android:id="@+id/seat_a4"
+                    style="@style/SeatStyle"
+                    android:layout_row="0"
+                    android:layout_column="3"
+                    android:background="@drawable/bg_seat_available"
+                    android:tag="A4"
+                    android:text="" />
+                <!-- AISLE GAP col 4 -->
+                <Space
+                    android:layout_width="24dp"
+                    android:layout_height="0dp"
+                    android:layout_row="0"
+                    android:layout_column="4" />
 
-            <TextView
-                android:id="@+id/seat_a6"
-                style="@style/SeatStyle"
-                android:layout_row="0"
-                android:layout_column="6"
-                android:background="@drawable/bg_seat_available"
-                android:tag="A6"
-                android:text="" />
+                <TextView
+                    android:id="@+id/seat_a5"
+                    style="@style/SeatStyle"
+                    android:layout_row="0"
+                    android:layout_column="5"
+                    android:background="@drawable/bg_seat_available"
+                    android:tag="A5"
+                    android:text="" />
 
-            <TextView
-                android:id="@+id/seat_a7"
-                style="@style/SeatStyle"
-                android:layout_row="0"
-                android:layout_column="7"
-                android:background="@drawable/bg_seat_available"
-                android:tag="A7"
-                android:text="" />
+                <TextView
+                    android:id="@+id/seat_a6"
+                    style="@style/SeatStyle"
+                    android:layout_row="0"
+                    android:layout_column="6"
+                    android:background="@drawable/bg_seat_available"
+                    android:tag="A6"
+                    android:text="" />
 
-            <TextView
-                android:id="@+id/seat_a8"
-                style="@style/SeatStyle"
-                android:layout_row="0"
-                android:layout_column="8"
-                android:background="@drawable/bg_seat_available"
-                android:tag="A8"
-                android:text="" />
+                <TextView
+                    android:id="@+id/seat_a7"
+                    style="@style/SeatStyle"
+                    android:layout_row="0"
+                    android:layout_column="7"
+                    android:background="@drawable/bg_seat_available"
+                    android:tag="A7"
+                    android:text="" />
 
-            <!-- ROW B -->
-            <TextView
-                android:id="@+id/seat_b1"
-                style="@style/SeatStyle"
-                android:layout_row="1"
-                android:layout_column="0"
-                android:background="@drawable/bg_seat_booked"
-                android:tag="B1"
-                android:text="" />
+                <TextView
+                    android:id="@+id/seat_a8"
+                    style="@style/SeatStyle"
+                    android:layout_row="0"
+                    android:layout_column="8"
+                    android:background="@drawable/bg_seat_available"
+                    android:tag="A8"
+                    android:text="" />
 
-            <TextView
-                android:id="@+id/seat_b2"
-                style="@style/SeatStyle"
-                android:layout_row="1"
-                android:layout_column="1"
-                android:background="@drawable/bg_seat_available"
-                android:tag="B2"
-                android:text="" />
+                <!-- ROW B -->
+                <TextView
+                    android:id="@+id/seat_b1"
+                    style="@style/SeatStyle"
+                    android:layout_row="1"
+                    android:layout_column="0"
+                    android:background="@drawable/bg_seat_booked"
+                    android:tag="B1"
+                    android:text="" />
 
-            <TextView
-                android:id="@+id/seat_b3"
-                style="@style/SeatStyle"
-                android:layout_row="1"
-                android:layout_column="2"
-                android:background="@drawable/bg_seat_available"
-                android:tag="B3"
-                android:text="" />
+                <TextView
+                    android:id="@+id/seat_b2"
+                    style="@style/SeatStyle"
+                    android:layout_row="1"
+                    android:layout_column="1"
+                    android:background="@drawable/bg_seat_available"
+                    android:tag="B2"
+                    android:text="" />
 
-            <TextView
-                android:id="@+id/seat_b4"
-                style="@style/SeatStyle"
-                android:layout_row="1"
-                android:layout_column="3"
-                android:background="@drawable/bg_seat_available"
-                android:tag="B4"
-                android:text="" />
+                <TextView
+                    android:id="@+id/seat_b3"
+                    style="@style/SeatStyle"
+                    android:layout_row="1"
+                    android:layout_column="2"
+                    android:background="@drawable/bg_seat_available"
+                    android:tag="B3"
+                    android:text="" />
 
-            <Space
-                android:layout_width="24dp"
-                android:layout_height="0dp"
-                android:layout_row="1"
-                android:layout_column="4" />
+                <TextView
+                    android:id="@+id/seat_b4"
+                    style="@style/SeatStyle"
+                    android:layout_row="1"
+                    android:layout_column="3"
+                    android:background="@drawable/bg_seat_available"
+                    android:tag="B4"
+                    android:text="" />
 
-            <TextView
-                android:id="@+id/seat_b5"
-                style="@style/SeatStyle"
-                android:layout_row="1"
-                android:layout_column="5"
-                android:background="@drawable/bg_seat_available"
-                android:tag="B5"
-                android:text="" />
+                <Space
+                    android:layout_width="24dp"
+                    android:layout_height="0dp"
+                    android:layout_row="1"
+                    android:layout_column="4" />
 
-            <TextView
-                android:id="@+id/seat_b6"
-                style="@style/SeatStyle"
-                android:layout_row="1"
-                android:layout_column="6"
-                android:background="@drawable/bg_seat_booked"
-                android:tag="B6"
-                android:text="" />
+                <TextView
+                    android:id="@+id/seat_b5"
+                    style="@style/SeatStyle"
+                    android:layout_row="1"
+                    android:layout_column="5"
+                    android:background="@drawable/bg_seat_available"
+                    android:tag="B5"
+                    android:text="" />
 
-            <TextView
-                android:id="@+id/seat_b7"
-                style="@style/SeatStyle"
-                android:layout_row="1"
-                android:layout_column="7"
-                android:background="@drawable/bg_seat_booked"
-                android:tag="B7"
-                android:text="" />
+                <TextView
+                    android:id="@+id/seat_b6"
+                    style="@style/SeatStyle"
+                    android:layout_row="1"
+                    android:layout_column="6"
+                    android:background="@drawable/bg_seat_booked"
+                    android:tag="B6"
+                    android:text="" />
 
-            <TextView
-                android:id="@+id/seat_b8"
-                style="@style/SeatStyle"
-                android:layout_row="1"
-                android:layout_column="8"
-                android:background="@drawable/bg_seat_available"
-                android:tag="B8"
-                android:text="" />
+                <TextView
+                    android:id="@+id/seat_b7"
+                    style="@style/SeatStyle"
+                    android:layout_row="1"
+                    android:layout_column="7"
+                    android:background="@drawable/bg_seat_booked"
+                    android:tag="B7"
+                    android:text="" />
 
-            <!-- ROW C -->
-            <TextView
-                android:id="@+id/seat_c1"
-                style="@style/SeatStyle"
-                android:layout_row="2"
-                android:layout_column="0"
-                android:background="@drawable/bg_seat_available"
-                android:tag="C1"
-                android:text="" />
+                <TextView
+                    android:id="@+id/seat_b8"
+                    style="@style/SeatStyle"
+                    android:layout_row="1"
+                    android:layout_column="8"
+                    android:background="@drawable/bg_seat_available"
+                    android:tag="B8"
+                    android:text="" />
 
-            <TextView
-                android:id="@+id/seat_c2"
-                style="@style/SeatStyle"
-                android:layout_row="2"
-                android:layout_column="1"
-                android:background="@drawable/bg_seat_available"
-                android:tag="C2"
-                android:text="" />
+                <!-- ROW C -->
+                <TextView
+                    android:id="@+id/seat_c1"
+                    style="@style/SeatStyle"
+                    android:layout_row="2"
+                    android:layout_column="0"
+                    android:background="@drawable/bg_seat_available"
+                    android:tag="C1"
+                    android:text="" />
 
-            <TextView
-                android:id="@+id/seat_c3"
-                style="@style/SeatStyle"
-                android:layout_row="2"
-                android:layout_column="2"
-                android:background="@drawable/bg_seat_available"
-                android:tag="C3"
-                android:text="" />
+                <TextView
+                    android:id="@+id/seat_c2"
+                    style="@style/SeatStyle"
+                    android:layout_row="2"
+                    android:layout_column="1"
+                    android:background="@drawable/bg_seat_available"
+                    android:tag="C2"
+                    android:text="" />
 
-            <TextView
-                android:id="@+id/seat_c4"
-                style="@style/SeatStyle"
-                android:layout_row="2"
-                android:layout_column="3"
-                android:background="@drawable/bg_seat_available"
-                android:tag="C4"
-                android:text="" />
+                <TextView
+                    android:id="@+id/seat_c3"
+                    style="@style/SeatStyle"
+                    android:layout_row="2"
+                    android:layout_column="2"
+                    android:background="@drawable/bg_seat_available"
+                    android:tag="C3"
+                    android:text="" />
 
-            <Space
-                android:layout_width="24dp"
-                android:layout_height="0dp"
-                android:layout_row="2"
-                android:layout_column="4" />
+                <TextView
+                    android:id="@+id/seat_c4"
+                    style="@style/SeatStyle"
+                    android:layout_row="2"
+                    android:layout_column="3"
+                    android:background="@drawable/bg_seat_available"
+                    android:tag="C4"
+                    android:text="" />
 
-            <TextView
-                android:id="@+id/seat_c5"
-                style="@style/SeatStyle"
-                android:layout_row="2"
-                android:layout_column="5"
-                android:background="@drawable/bg_seat_available"
-                android:tag="C5"
-                android:text="" />
+                <Space
+                    android:layout_width="24dp"
+                    android:layout_height="0dp"
+                    android:layout_row="2"
+                    android:layout_column="4" />
 
-            <TextView
-                android:id="@+id/seat_c6"
-                style="@style/SeatStyle"
-                android:layout_row="2"
-                android:layout_column="6"
-                android:background="@drawable/bg_seat_available"
-                android:tag="C6"
-                android:text="" />
+                <TextView
+                    android:id="@+id/seat_c5"
+                    style="@style/SeatStyle"
+                    android:layout_row="2"
+                    android:layout_column="5"
+                    android:background="@drawable/bg_seat_available"
+                    android:tag="C5"
+                    android:text="" />
 
-            <TextView
-                android:id="@+id/seat_c7"
-                style="@style/SeatStyle"
-                android:layout_row="2"
-                android:layout_column="7"
-                android:background="@drawable/bg_seat_available"
-                android:tag="C7"
-                android:text="" />
+                <TextView
+                    android:id="@+id/seat_c6"
+                    style="@style/SeatStyle"
+                    android:layout_row="2"
+                    android:layout_column="6"
+                    android:background="@drawable/bg_seat_available"
+                    android:tag="C6"
+                    android:text="" />
 
-            <TextView
-                android:id="@+id/seat_c8"
-                style="@style/SeatStyle"
-                android:layout_row="2"
-                android:layout_column="8"
-                android:background="@drawable/bg_seat_available"
-                android:tag="C8"
-                android:text="" />
+                <TextView
+                    android:id="@+id/seat_c7"
+                    style="@style/SeatStyle"
+                    android:layout_row="2"
+                    android:layout_column="7"
+                    android:background="@drawable/bg_seat_available"
+                    android:tag="C7"
+                    android:text="" />
 
-            <!-- ROW D -->
-            <TextView
-                android:id="@+id/seat_d1"
-                style="@style/SeatStyle"
-                android:layout_row="3"
-                android:layout_column="0"
-                android:background="@drawable/bg_seat_available"
-                android:tag="D1"
-                android:text="" />
+                <TextView
+                    android:id="@+id/seat_c8"
+                    style="@style/SeatStyle"
+                    android:layout_row="2"
+                    android:layout_column="8"
+                    android:background="@drawable/bg_seat_available"
+                    android:tag="C8"
+                    android:text="" />
 
-            <TextView
-                android:id="@+id/seat_d2"
-                style="@style/SeatStyle"
-                android:layout_row="3"
-                android:layout_column="1"
-                android:background="@drawable/bg_seat_booked"
-                android:tag="D2"
-                android:text="" />
+                <!-- ROW D -->
+                <TextView
+                    android:id="@+id/seat_d1"
+                    style="@style/SeatStyle"
+                    android:layout_row="3"
+                    android:layout_column="0"
+                    android:background="@drawable/bg_seat_available"
+                    android:tag="D1"
+                    android:text="" />
 
-            <TextView
-                android:id="@+id/seat_d3"
-                style="@style/SeatStyle"
-                android:layout_row="3"
-                android:layout_column="2"
-                android:background="@drawable/bg_seat_booked"
-                android:tag="D3"
-                android:text="" />
+                <TextView
+                    android:id="@+id/seat_d2"
+                    style="@style/SeatStyle"
+                    android:layout_row="3"
+                    android:layout_column="1"
+                    android:background="@drawable/bg_seat_booked"
+                    android:tag="D2"
+                    android:text="" />
 
-            <TextView
-                android:id="@+id/seat_d4"
-                style="@style/SeatStyle"
-                android:layout_row="3"
-                android:layout_column="3"
-                android:background="@drawable/bg_seat_available"
-                android:tag="D4"
-                android:text="" />
+                <TextView
+                    android:id="@+id/seat_d3"
+                    style="@style/SeatStyle"
+                    android:layout_row="3"
+                    android:layout_column="2"
+                    android:background="@drawable/bg_seat_booked"
+                    android:tag="D3"
+                    android:text="" />
 
-            <Space
-                android:layout_width="24dp"
-                android:layout_height="0dp"
-                android:layout_row="3"
-                android:layout_column="4" />
+                <TextView
+                    android:id="@+id/seat_d4"
+                    style="@style/SeatStyle"
+                    android:layout_row="3"
+                    android:layout_column="3"
+                    android:background="@drawable/bg_seat_available"
+                    android:tag="D4"
+                    android:text="" />
 
-            <TextView
-                android:id="@+id/seat_d5"
-                style="@style/SeatStyle"
-                android:layout_row="3"
-                android:layout_column="5"
-                android:background="@drawable/bg_seat_available"
-                android:tag="D5"
-                android:text="" />
+                <Space
+                    android:layout_width="24dp"
+                    android:layout_height="0dp"
+                    android:layout_row="3"
+                    android:layout_column="4" />
 
-            <TextView
-                android:id="@+id/seat_d6"
-                style="@style/SeatStyle"
-                android:layout_row="3"
-                android:layout_column="6"
-                android:background="@drawable/bg_seat_available"
-                android:tag="D6"
-                android:text="" />
+                <TextView
+                    android:id="@+id/seat_d5"
+                    style="@style/SeatStyle"
+                    android:layout_row="3"
+                    android:layout_column="5"
+                    android:background="@drawable/bg_seat_available"
+                    android:tag="D5"
+                    android:text="" />
 
-            <TextView
-                android:id="@+id/seat_d7"
-                style="@style/SeatStyle"
-                android:layout_row="3"
-                android:layout_column="7"
-                android:background="@drawable/bg_seat_available"
-                android:tag="D7"
-                android:text="" />
+                <TextView
+                    android:id="@+id/seat_d6"
+                    style="@style/SeatStyle"
+                    android:layout_row="3"
+                    android:layout_column="6"
+                    android:background="@drawable/bg_seat_available"
+                    android:tag="D6"
+                    android:text="" />
 
-            <TextView
-                android:id="@+id/seat_d8"
-                style="@style/SeatStyle"
-                android:layout_row="3"
-                android:layout_column="8"
-                android:background="@drawable/bg_seat_available"
-                android:tag="D8"
-                android:text="" />
+                <TextView
+                    android:id="@+id/seat_d7"
+                    style="@style/SeatStyle"
+                    android:layout_row="3"
+                    android:layout_column="7"
+                    android:background="@drawable/bg_seat_available"
+                    android:tag="D7"
+                    android:text="" />
 
-            <!-- ROW E -->
-            <TextView
-                android:id="@+id/seat_e1"
-                style="@style/SeatStyle"
-                android:layout_row="4"
-                android:layout_column="0"
-                android:background="@drawable/bg_seat_available"
-                android:tag="E1"
-                android:text="" />
+                <TextView
+                    android:id="@+id/seat_d8"
+                    style="@style/SeatStyle"
+                    android:layout_row="3"
+                    android:layout_column="8"
+                    android:background="@drawable/bg_seat_available"
+                    android:tag="D8"
+                    android:text="" />
 
-            <TextView
-                android:id="@+id/seat_e2"
-                style="@style/SeatStyle"
-                android:layout_row="4"
-                android:layout_column="1"
-                android:background="@drawable/bg_seat_available"
-                android:tag="E2"
-                android:text="" />
+                <!-- ROW E -->
+                <TextView
+                    android:id="@+id/seat_e1"
+                    style="@style/SeatStyle"
+                    android:layout_row="4"
+                    android:layout_column="0"
+                    android:background="@drawable/bg_seat_available"
+                    android:tag="E1"
+                    android:text="" />
 
-            <TextView
-                android:id="@+id/seat_e3"
-                style="@style/SeatStyle"
-                android:layout_row="4"
-                android:layout_column="2"
-                android:background="@drawable/bg_seat_available"
-                android:tag="E3"
-                android:text="" />
+                <TextView
+                    android:id="@+id/seat_e2"
+                    style="@style/SeatStyle"
+                    android:layout_row="4"
+                    android:layout_column="1"
+                    android:background="@drawable/bg_seat_available"
+                    android:tag="E2"
+                    android:text="" />
 
-            <TextView
-                android:id="@+id/seat_e4"
-                style="@style/SeatStyle"
-                android:layout_row="4"
-                android:layout_column="3"
-                android:background="@drawable/bg_seat_available"
-                android:tag="E4"
-                android:text="" />
+                <TextView
+                    android:id="@+id/seat_e3"
+                    style="@style/SeatStyle"
+                    android:layout_row="4"
+                    android:layout_column="2"
+                    android:background="@drawable/bg_seat_available"
+                    android:tag="E3"
+                    android:text="" />
 
-            <Space
-                android:layout_width="24dp"
-                android:layout_height="0dp"
-                android:layout_row="4"
-                android:layout_column="4" />
+                <TextView
+                    android:id="@+id/seat_e4"
+                    style="@style/SeatStyle"
+                    android:layout_row="4"
+                    android:layout_column="3"
+                    android:background="@drawable/bg_seat_available"
+                    android:tag="E4"
+                    android:text="" />
 
-            <TextView
-                android:id="@+id/seat_e5"
-                style="@style/SeatStyle"
-                android:layout_row="4"
-                android:layout_column="5"
-                android:background="@drawable/bg_seat_available"
-                android:tag="E5"
-                android:text="" />
+                <Space
+                    android:layout_width="24dp"
+                    android:layout_height="0dp"
+                    android:layout_row="4"
+                    android:layout_column="4" />
 
-            <TextView
-                android:id="@+id/seat_e6"
-                style="@style/SeatStyle"
-                android:layout_row="4"
-                android:layout_column="6"
-                android:background="@drawable/bg_seat_booked"
-                android:tag="E6"
-                android:text="" />
+                <TextView
+                    android:id="@+id/seat_e5"
+                    style="@style/SeatStyle"
+                    android:layout_row="4"
+                    android:layout_column="5"
+                    android:background="@drawable/bg_seat_available"
+                    android:tag="E5"
+                    android:text="" />
 
-            <TextView
-                android:id="@+id/seat_e7"
-                style="@style/SeatStyle"
-                android:layout_row="4"
-                android:layout_column="7"
-                android:background="@drawable/bg_seat_booked"
-                android:tag="E7"
-                android:text="" />
+                <TextView
+                    android:id="@+id/seat_e6"
+                    style="@style/SeatStyle"
+                    android:layout_row="4"
+                    android:layout_column="6"
+                    android:background="@drawable/bg_seat_booked"
+                    android:tag="E6"
+                    android:text="" />
 
-            <TextView
-                android:id="@+id/seat_e8"
-                style="@style/SeatStyle"
-                android:layout_row="4"
-                android:layout_column="8"
-                android:background="@drawable/bg_seat_available"
-                android:tag="E8"
-                android:text="" />
-        </GridLayout>
+                <TextView
+                    android:id="@+id/seat_e7"
+                    style="@style/SeatStyle"
+                    android:layout_row="4"
+                    android:layout_column="7"
+                    android:background="@drawable/bg_seat_booked"
+                    android:tag="E7"
+                    android:text="" />
 
-        <!-- Legend - CENTERED -->
+                <TextView
+                    android:id="@+id/seat_e8"
+                    style="@style/SeatStyle"
+                    android:layout_row="4"
+                    android:layout_column="8"
+                    android:background="@drawable/bg_seat_available"
+                    android:tag="E8"
+                    android:text="" />
+            </GridLayout>
+        </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -696,7 +697,7 @@
                     android:layout_width="10dp"
                     android:layout_height="10dp"
                     android:layout_marginEnd="6dp"
-                    android:background="@drawable/bg_badge_red" />
+                    android:background="@drawable/bg_seat_booked" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -717,7 +718,7 @@
                     android:layout_width="10dp"
                     android:layout_height="10dp"
                     android:layout_marginEnd="6dp"
-                    android:background="@drawable/bg_badge_green" />
+                    android:background="@drawable/bg_seat_selected" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -737,7 +738,7 @@
                     android:layout_width="10dp"
                     android:layout_height="10dp"
                     android:layout_marginEnd="6dp"
-                    android:background="@drawable/bg_legend_dot_available" />
+                    android:background="@drawable/bg_seat_available" />
 
                 <TextView
                     android:layout_width="wrap_content"
