@@ -16,18 +16,19 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 public class SeatSelectionFragment extends Fragment {
 
-    private Movie movie;
     private List<String> selectedSeats = new ArrayList<>();
     private double seatPrice = 12.99;
     private GridLayout seatGrid;
     private Button btnBook;
     private Button btnSnacks;
 
-    public static SeatSelectionFragment newInstance(Movie movie) {
+    public static SeatSelectionFragment newInstance(Movie movie, String selectedDate) {
         SeatSelectionFragment fragment = new SeatSelectionFragment();
         Bundle args = new Bundle();
         args.putString("name", movie.name);
@@ -35,6 +36,11 @@ public class SeatSelectionFragment extends Fragment {
         args.putString("trailer", movie.trailer);
         args.putBoolean("comingSoon", movie.isComingSoon);
         args.putInt("posterResId", movie.posterResId);
+        args.putString("selectedDate", selectedDate);
+
+        // Generate future time (current time + 3 hours for booking)
+        args.putString("selectedTime", getFutureTime());
+        args.putLong("timestamp", getFutureTimestamp(selectedDate));
 
         // Store booked seats as ArrayList in Bundle
         ArrayList<String> bookedSeatsList = new ArrayList<>(movie.bookedSeats);
@@ -44,11 +50,44 @@ public class SeatSelectionFragment extends Fragment {
         return fragment;
     }
 
+    private static String getFutureTime() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.HOUR_OF_DAY, 3); // Add 3 hours for booking time
+        java.text.SimpleDateFormat timeFormat = new java.text.SimpleDateFormat("HH:mm", Locale.getDefault());
+        return timeFormat.format(calendar.getTime());
+    }
+
+    private static long getFutureTimestamp(String selectedDate) {
+        Calendar calendar = Calendar.getInstance();
+
+        if (selectedDate.equals("Tomorrow")) {
+            calendar.add(Calendar.DAY_OF_YEAR, 1);
+        }
+
+        // Adding 3 hours to make it future booking
+        calendar.add(Calendar.HOUR_OF_DAY, 3);
+
+        return calendar.getTimeInMillis();
+    }
+
+    private String getFormattedDate(String selectedDate) {
+        Calendar calendar = Calendar.getInstance();
+
+        if (selectedDate.equals("Tomorrow")) {
+            calendar.add(Calendar.DAY_OF_YEAR, 1);
+        }
+
+        java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
+        return dateFormat.format(calendar.getTime());
+    }
+
     @SuppressLint("SetTextI18n")
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_seat_booking, container, false);
 
         TextView tvMovieName = view.findViewById(R.id.tvMovieName);
+        TextView tvDate = view.findViewById(R.id.tvDate);
+        TextView tvTime = view.findViewById(R.id.tvTime);
         seatGrid = view.findViewById(R.id.seatGrid);
         btnBook = view.findViewById(R.id.btnBookSeats);
         btnSnacks = view.findViewById(R.id.btnProceedToSnacks);
@@ -59,8 +98,14 @@ public class SeatSelectionFragment extends Fragment {
         boolean isComingSoon = getArguments().getBoolean("comingSoon");
         String trailer = getArguments().getString("trailer");
         int posterResId = getArguments().getInt("posterResId", R.drawable.poster);
+        String selectedDate = getArguments().getString("selectedDate", "Today");
+        String selectedTime = getArguments().getString("selectedTime", "22:15");
+        long timestamp = getArguments().getLong("timestamp", System.currentTimeMillis());
 
-        // Get booked seats from arguments
+        String displayDate = getFormattedDate(selectedDate);
+        tvDate.setText(displayDate);
+        tvTime.setText(selectedTime);
+
         ArrayList<String> bookedSeatsList = getArguments().getStringArrayList("bookedSeats");
         if (bookedSeatsList == null) {
             bookedSeatsList = new ArrayList<>();
@@ -73,7 +118,6 @@ public class SeatSelectionFragment extends Fragment {
         );
 
         if (isComingSoon) {
-            // Coming Soon: Disable all seats
             for (int i = 0; i < seatGrid.getChildCount(); i++) {
                 View child = seatGrid.getChildAt(i);
                 if (child instanceof TextView) {
@@ -111,14 +155,11 @@ public class SeatSelectionFragment extends Fragment {
             setupSeatClicks(bookedSeatsList);
 
             btnBook.setOnClickListener(v -> {
-                Log.d("SeatSelection", "Book button clicked. Selected seats: " + selectedSeats.toString());
                 if (selectedSeats.isEmpty()) {
                     Toast.makeText(getContext(), "Please select at least one seat", Toast.LENGTH_LONG).show();
                 } else {
                     double totalSeatPrice = selectedSeats.size() * seatPrice;
                     String seatsFormatted = formatSelectedSeats();
-
-                    Log.d("SeatSelection", "Formatted seats: " + seatsFormatted);
 
                     String bookingDetails = "Movie: " + name +
                             "\n\nSeats: " + seatsFormatted +
@@ -133,7 +174,10 @@ public class SeatSelectionFragment extends Fragment {
                             seatsFormatted,
                             "No snacks selected",
                             0,
-                            posterResId
+                            posterResId,
+                            displayDate,
+                            selectedTime,
+                            timestamp
                     );
 
                     requireActivity().getSupportFragmentManager()
@@ -145,7 +189,6 @@ public class SeatSelectionFragment extends Fragment {
             });
 
             btnSnacks.setOnClickListener(v -> {
-                Log.d("SeatSelection", "Snacks button clicked. Selected seats: " + selectedSeats.toString());
                 if (selectedSeats.isEmpty()) {
                     Toast.makeText(getContext(), "Please select at least one seat first", Toast.LENGTH_LONG).show();
                 } else {
@@ -157,7 +200,10 @@ public class SeatSelectionFragment extends Fragment {
                             seatsFormatted,
                             selectedSeats.size(),
                             totalSeatPrice,
-                            posterResId
+                            posterResId,
+                            displayDate,
+                            selectedTime,
+                            timestamp
                     );
 
                     requireActivity().getSupportFragmentManager()
@@ -184,66 +230,41 @@ public class SeatSelectionFragment extends Fragment {
     }
 
     private void setupSeatClicks(ArrayList<String> bookedSeatsList) {
-        Log.d("SeatSelection", "Setting up seat clicks. Booked seats: " + bookedSeatsList.toString());
-
         for (int i = 0; i < seatGrid.getChildCount(); i++) {
             View seatView = seatGrid.getChildAt(i);
 
             if (seatView instanceof TextView) {
                 final TextView seat = (TextView) seatView;
-
-                // IMPORTANT: Get the seat number from the TAG (not from text)
                 final String seatNum = (String) seat.getTag();
 
-                if (seatNum == null) {
-                    Log.d("SeatSelection", "Seat at index " + i + " has null tag, skipping");
-                    continue;
-                }
-
-                Log.d("SeatSelection", "Found seat: " + seatNum);
+                if (seatNum == null) continue;
 
                 // Check if this seat is pre-booked
                 if (bookedSeatsList.contains(seatNum)) {
                     seat.setBackgroundResource(R.drawable.bg_seat_booked);
                     seat.setClickable(false);
                     seat.setEnabled(false);
-                    Log.d("SeatSelection", "Seat " + seatNum + " is booked (disabled)");
                     continue;
                 }
 
-                // Set initial background for available seats
                 seat.setBackgroundResource(R.drawable.bg_seat_available);
                 seat.setClickable(true);
                 seat.setEnabled(true);
 
-                // Make available seats clickable
                 seat.setOnClickListener(v -> {
-                    // Get the seat number from the clicked view's tag
                     String clickedSeatNum = (String) seat.getTag();
 
-                    Log.d("SeatSelection", "Seat clicked: " + clickedSeatNum);
-                    Log.d("SeatSelection", "Current selected seats before: " + selectedSeats.toString());
-
                     if (selectedSeats.contains(clickedSeatNum)) {
-                        // Deselect seat
                         selectedSeats.remove(clickedSeatNum);
                         seat.setBackgroundResource(R.drawable.bg_seat_available);
                         Toast.makeText(getContext(), "Deselected " + clickedSeatNum, Toast.LENGTH_SHORT).show();
-                        Log.d("SeatSelection", "Deselected: " + clickedSeatNum);
                     } else {
-                        // Select seat
                         selectedSeats.add(clickedSeatNum);
                         seat.setBackgroundResource(R.drawable.bg_seat_selected);
                         Toast.makeText(getContext(), "Selected " + clickedSeatNum, Toast.LENGTH_SHORT).show();
-                        Log.d("SeatSelection", "Selected: " + clickedSeatNum);
                     }
-
-                    Log.d("SeatSelection", "Current selected seats after: " + selectedSeats.toString());
                 });
             }
         }
-
-        Log.d("SeatSelection", "Seat setup complete. Total clickable seats: " +
-                (seatGrid.getChildCount() - bookedSeatsList.size()));
     }
 }

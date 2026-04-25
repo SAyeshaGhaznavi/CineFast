@@ -25,8 +25,25 @@ public class TicketSummaryFragment extends Fragment {
     private double total;
     private int moviePosterResId;
 
-    public static TicketSummaryFragment newInstance(String bookingDetails, double total, String movieName, String selectedSeats) {
-        return newInstance(bookingDetails, total, movieName, selectedSeats, "", 0, 0);
+    public static TicketSummaryFragment newInstance(String bookingDetails, double total, String movieName,
+                                                    String selectedSeats, String snacksDetails,
+                                                    double snacksTotal, int moviePosterResId,
+                                                    String date, String time, long timestamp) {
+        Bundle args = new Bundle();
+        args.putString("bookingDetails", bookingDetails);
+        args.putDouble("total", total);
+        args.putString("movieName", movieName);
+        args.putString("selectedSeats", selectedSeats);
+        args.putString("snacksDetails", snacksDetails);
+        args.putDouble("snacksTotal", snacksTotal);
+        args.putInt("moviePosterResId", moviePosterResId);
+        args.putString("date", date);
+        args.putString("time", time);
+        args.putLong("timestamp", timestamp);
+
+        TicketSummaryFragment fragment = new TicketSummaryFragment();
+        fragment.setArguments(args);
+        return fragment;
     }
 
     public static TicketSummaryFragment newInstance(String bookingDetails, double total, String movieName,
@@ -66,16 +83,13 @@ public class TicketSummaryFragment extends Fragment {
         moviePosterResId = getArguments().getInt("moviePosterResId", R.drawable.poster);
         seatTotal = total - snacksTotal;
 
-        // Set movie poster and name
         if (moviePosterResId != 0) {
             ivMoviePoster.setImageResource(moviePosterResId);
         }
         tvMovieName.setText(movieName);
 
-        // Set booking details (tickets)
         tvBookingDetails.setText(bookingDetails);
 
-        // Set snacks details
         if (snacksDetails != null && !snacksDetails.isEmpty() && !snacksDetails.equals("No snacks selected")) {
             tvSnacks.setText(snacksDetails);
         } else {
@@ -84,7 +98,6 @@ public class TicketSummaryFragment extends Fragment {
 
         tvTotal.setText("$" + String.format("%.2f", total));
 
-        // Format snacks information for SharedPreferences
         String snacksInfo;
         if (snacksDetails != null && !snacksDetails.isEmpty() && !snacksDetails.equals("No snacks selected")) {
             snacksInfo = snacksDetails;
@@ -92,7 +105,6 @@ public class TicketSummaryFragment extends Fragment {
             snacksInfo = "No snacks selected";
         }
 
-        // SAVE TO SharedPreferences - Store all required information including snacks
         SharedPreferences prefs = requireContext().getSharedPreferences("booking", Context.MODE_PRIVATE);
 
         SharedPreferences.Editor editor = prefs.edit();
@@ -105,18 +117,13 @@ public class TicketSummaryFragment extends Fragment {
         editor.putString("total_amount", String.format("%.2f", total));
         editor.apply();
 
-        // Save booking to Firebase
         saveBookingToFirebase();
 
-        // Share via WhatsApp button
         btnShareWhatsApp.setOnClickListener(v -> shareViaWhatsApp());
 
-        // Done button to go back to Home
         btnDone.setOnClickListener(v -> {
-            // Clear back stack and go to HomeFragment
             requireActivity().getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
-            // Replace with HomeFragment
             HomeFragment homeFragment = new HomeFragment();
             homeFragment.setFragmentManager(requireActivity().getSupportFragmentManager());
 
@@ -162,15 +169,12 @@ public class TicketSummaryFragment extends Fragment {
             intent.setPackage("com.whatsapp");
             intent.putExtra(Intent.EXTRA_TEXT, message);
 
-            // Check if WhatsApp is installed
             if (intent.resolveActivity(requireActivity().getPackageManager()) != null) {
                 startActivity(intent);
             } else {
-                // If WhatsApp is not installed, ask if user wants to share via other apps
                 showShareOptions(message);
             }
         } catch (Exception e) {
-            // If any error occurs, show alternative sharing options
             showShareOptions(message);
         }
     }
@@ -190,52 +194,38 @@ public class TicketSummaryFragment extends Fragment {
     }
 
     private void saveBookingToFirebase() {
-        // Check if user is logged in
         if (FirebaseAuth.getInstance().getCurrentUser() == null) {
-            Log.d("TicketSummary", "User not logged in, skipping Firebase save");
             return;
         }
 
-        try {
-            String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-            DatabaseReference bookingsRef = FirebaseDatabase.getInstance()
-                    .getReference("bookings")
-                    .child(userId)
-                    .push(); // Auto-generate unique ID
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference bookingsRef = FirebaseDatabase.getInstance()
+                .getReference("bookings")
+                .child(userId)
+                .push();
 
-            String date = "13.04.2025";
-            String time = "22:15";
+        String bookingId = bookingsRef.getKey();
+        int ticketCount = selectedSeats.split(",").length;
 
-            // Make sure selectedSeats is not null
-            String seatsToSave = selectedSeats != null ? selectedSeats : "No seats";
-            String snacksToSave = snacksDetails != null ? snacksDetails : "No snacks selected";
-            int ticketCount = seatsToSave.split(",").length;
+        // Get timestamp from arguments
+        long timestamp = getArguments().getLong("timestamp", System.currentTimeMillis());
+        String date = getArguments().getString("date", "13.04.2025");
+        String time = getArguments().getString("time", "22:15");
 
-            Booking booking = new Booking(
-                    bookingsRef.getKey(),
-                    movieName,
-                    String.valueOf(moviePosterResId),
-                    date,
-                    time,
-                    ticketCount,
-                    total,
-                    System.currentTimeMillis(),
-                    seatsToSave,
-                    snacksToSave
-            );
+        Booking booking = new Booking(
+                bookingId,
+                movieName,
+                String.valueOf(moviePosterResId),
+                date,
+                time,
+                ticketCount,
+                total,
+                timestamp,
+                selectedSeats,
+                snacksDetails != null ? snacksDetails : "No snacks selected"
+        );
 
-            bookingsRef.setValue(booking)
-                    .addOnSuccessListener(aVoid -> {
-                        Log.d("TicketSummary", "Booking saved to Firebase successfully!");
-                        Toast.makeText(getContext(), "Booking saved!", Toast.LENGTH_SHORT).show();
-                    })
-                    .addOnFailureListener(e -> {
-                        Log.e("TicketSummary", "Failed to save booking: " + e.getMessage());
-                        Toast.makeText(getContext(), "Failed to save booking", Toast.LENGTH_SHORT).show();
-                    });
-        } catch (Exception e) {
-            Log.e("TicketSummary", "Error saving to Firebase: " + e.getMessage());
-        }
+        bookingsRef.setValue(booking);
     }
 
     private String getCurrentDate() {

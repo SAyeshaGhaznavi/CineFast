@@ -25,55 +25,12 @@ public class ComingSoonFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        ArrayList<Movie> movieList = new ArrayList<>();
-
-        // Coming soon movies - NO BOOKED SEATS (all seats available)
-        // isComingSoon = true ensures no red seats appear
-
-        // Dune Part 3
-        Movie dune3 = new Movie(
-                "Dune Part 3",
-                "Sci-Fi / 190 min",
-                "https://youtu.be/3aAvQxtvKiA?si=4_m0v6cK2Pqqwu8Z",
-                R.drawable.dune3,
-                true  // Coming Soon = no booked seats
-        );
-        // No booked seats added for coming soon movies
-        movieList.add(dune3);
-
-        // The Odyssey
-        Movie odyssey = new Movie(
-                "The Odyssey",
-                "Action / 169 min",
-                "https://youtu.be/l54pzz3-Yl8?si=NTWo-dMcL8Vt3s1S",
-                R.drawable.odyssey,
-                true
-        );
-        movieList.add(odyssey);
-
-        // The Drama
-        Movie drama = new Movie(
-                "The Drama",
-                "Drama / 164 min",
-                "https://youtu.be/t95Mng97rkI?si=-ulFUd1Tj2mja39I",
-                R.drawable.thedrama,
-                true
-        );
-        movieList.add(drama);
-
-        // Dracula
-        Movie dracula = new Movie(
-                "Dracula",
-                "Sci-Fi / 141 min",
-                "https://youtu.be/5GK_cFZ5XgE?si=LV4gUCMUinN_RbeK",
-                R.drawable.dracula,
-                true
-        );
-        movieList.add(dracula);
+        ArrayList<Movie> movieList = JSONParser.parseComingSoonMovies(getContext());
 
         MovieAdapter adapter = new MovieAdapter(
                 movieList,
-                requireActivity().getSupportFragmentManager()
+                requireActivity().getSupportFragmentManager(),
+                null
         );
         recyclerView.setAdapter(adapter);
 

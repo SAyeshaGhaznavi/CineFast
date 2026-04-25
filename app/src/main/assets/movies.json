@@ -1,0 +1,106 @@
+{
+  "now_showing": {
+    "today": [
+      {
+        "name": "Sinners",
+        "details": "Action / 152 min",
+        "trailer": "https://youtu.be/tQGN0Ws2Hms?si=B0oDLSYUaA1GDGoM",
+        "posterResId": "sinners",
+        "isComingSoon": false,
+        "bookedSeats": ["B1", "B6", "C3", "C4", "D2", "E7"]
+      },
+      {
+        "name": "Marty Supreme",
+        "details": "Drama / 148 min",
+        "trailer": "https://youtu.be/pwE3ZG1kIqw?si=NWyLoGPPCUHlH8iT",
+        "posterResId": "marty_supreme",
+        "isComingSoon": false,
+        "bookedSeats": ["A1", "A8", "C2", "D4", "D5", "E1"]
+      },
+      {
+        "name": "One Battle After Another",
+        "details": "Action / 169 min",
+        "trailer": "https://youtu.be/sNKVffxD_9o?si=bNPpX9HPLuNMFMH9",
+        "posterResId": "one_battle_after_another",
+        "isComingSoon": false,
+        "bookedSeats": ["B2", "B3", "C5", "C6", "D7", "E4"]
+      },
+      {
+        "name": "Call me by your name",
+        "details": "Drama / 169 min",
+        "trailer": "https://youtu.be/Mzq8MXzhBdw?si=b8mtXi6I1X6o944U",
+        "posterResId": "call_me_by_your_name",
+        "isComingSoon": false,
+        "bookedSeats": ["A4", "A5", "B4", "C7", "D6", "E3"]
+      }
+    ],
+    "tomorrow": [
+      {
+        "name": "Project Hail Mary",
+        "details": "Sci-Fi / 122 min",
+        "trailer": "https://youtu.be/P0XN3-n-2Lo?si=uthk67ZXEAHp33Cl",
+        "posterResId": "project_hail_mary",
+        "isComingSoon": false,
+        "bookedSeats": ["A2", "A3", "B5", "C1", "D8", "E2"]
+      },
+      {
+        "name": "Wuthering Heights",
+        "details": "Drama / 155 min",
+        "trailer": "https://youtu.be/DZV1woNnJGU?si=0LvIAQ17lnWmP7pH",
+        "posterResId": "wuthering_heigts",
+        "isComingSoon": false,
+        "bookedSeats": ["B7", "B8", "C4", "D1", "E5", "E6"]
+      },
+      {
+        "name": "Weapons",
+        "details": "Horror / 148 min",
+        "trailer": "https://youtu.be/GTowMnn-8sk?si=L5G2eSE6p-1aSkPq",
+        "posterResId": "weapons",
+        "isComingSoon": false,
+        "bookedSeats": ["A6", "A7", "C8", "D3", "E1", "E8"]
+      },
+      {
+        "name": "Bugonia",
+        "details": "Drama / 163 min",
+        "trailer": "https://youtu.be/GYanIV0BNyY?si=cOc4kFdzLap_dIHi",
+        "posterResId": "bugonia",
+        "isComingSoon": false,
+        "bookedSeats": ["B2", "C5", "C6", "D4", "E2", "E3"]
+      }
+    ]
+  },
+  "coming_soon": [
+    {
+      "name": "Dune Part 3",
+      "details": "Sci-Fi / 190 min",
+      "trailer": "https://youtu.be/3aAvQxtvKiA?si=4_m0v6cK2Pqqwu8Z",
+      "posterResId": "dune3",
+      "isComingSoon": true,
+      "bookedSeats": []
+    },
+    {
+      "name": "The Odyssey",
+      "details": "Action / 169 min",
+      "trailer": "https://youtu.be/l54pzz3-Yl8?si=NTWo-dMcL8Vt3s1S",
+      "posterResId": "odyssey",
+      "isComingSoon": true,
+      "bookedSeats": []
+    },
+    {
+      "name": "The Drama",
+      "details": "Drama / 164 min",
+      "trailer": "https://youtu.be/t95Mng97rkI?si=-ulFUd1Tj2mja39I",
+      "posterResId": "thedrama",
+      "isComingSoon": true,
+      "bookedSeats": []
+    },
+    {
+      "name": "Dracula",
+      "details": "Sci-Fi / 141 min",
+      "trailer": "https://youtu.be/5GK_cFZ5XgE?si=LV4gUCMUinN_RbeK",
+      "posterResId": "dracula",
+      "isComingSoon": true,
+      "bookedSeats": []
+    }
+  ]
+}

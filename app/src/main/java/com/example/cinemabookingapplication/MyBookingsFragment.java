@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -42,10 +43,15 @@ public class MyBookingsFragment extends Fragment implements BookingAdapter.OnBoo
         bookingAdapter = new BookingAdapter(bookingList, getContext(), this);
         rvBookings.setAdapter(bookingAdapter);
 
-        userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        bookingsRef = FirebaseDatabase.getInstance().getReference("bookings").child(userId);
-
-        loadBookings();
+        // Get current user ID
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            bookingsRef = FirebaseDatabase.getInstance().getReference("bookings").child(userId);
+            loadBookings();
+        } else {
+            tvNoBookings.setVisibility(View.VISIBLE);
+            tvNoBookings.setText("Please login to view your bookings");
+        }
 
         return view;
     }
@@ -66,6 +72,7 @@ public class MyBookingsFragment extends Fragment implements BookingAdapter.OnBoo
                 if (bookingList.isEmpty()) {
                     rvBookings.setVisibility(View.GONE);
                     tvNoBookings.setVisibility(View.VISIBLE);
+                    tvNoBookings.setText("No bookings found.\nBook a movie to see it here!");
                 } else {
                     rvBookings.setVisibility(View.VISIBLE);
                     tvNoBookings.setVisibility(View.GONE);
@@ -77,13 +84,13 @@ public class MyBookingsFragment extends Fragment implements BookingAdapter.OnBoo
             public void onCancelled(@NonNull DatabaseError error) {
                 tvNoBookings.setVisibility(View.VISIBLE);
                 tvNoBookings.setText("Error loading bookings: " + error.getMessage());
+                Toast.makeText(getContext(), "Failed to load bookings", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     @Override
     public void onBookingCancelled(String bookingId) {
-
         for (int i = 0; i < bookingList.size(); i++) {
             if (bookingList.get(i).getBookingId().equals(bookingId)) {
                 bookingList.remove(i);
@@ -95,6 +102,9 @@ public class MyBookingsFragment extends Fragment implements BookingAdapter.OnBoo
         if (bookingList.isEmpty()) {
             rvBookings.setVisibility(View.GONE);
             tvNoBookings.setVisibility(View.VISIBLE);
+            tvNoBookings.setText("No bookings found.\nBook a movie to see it here!");
         }
+
+        Toast.makeText(getContext(), "Booking Cancelled Successfully", Toast.LENGTH_SHORT).show();
     }
 }

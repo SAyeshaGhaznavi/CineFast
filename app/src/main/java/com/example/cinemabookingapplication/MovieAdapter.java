@@ -17,10 +17,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
     private List<Movie> movieList;
     private FragmentManager fragmentManager;
+    private String selectedDate;
 
-    public MovieAdapter(List<Movie> movieList, FragmentManager fragmentManager) {
+    public MovieAdapter(List<Movie> movieList, FragmentManager fragmentManager, String selectedDate) {
         this.movieList = movieList;
         this.fragmentManager = fragmentManager;
+        this.selectedDate = selectedDate;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -52,7 +54,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
         holder.title.setText(movie.name);
         holder.details.setText(movie.details);
-        holder.image.setImageResource(movie.posterResId); // Changed from movie.image to movie.posterResId
+        holder.image.setImageResource(movie.posterResId);
 
         holder.btnTrailer.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(movie.trailer));
@@ -60,7 +62,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         });
 
         holder.btnBook.setOnClickListener(v -> {
-            SeatSelectionFragment fragment = SeatSelectionFragment.newInstance(movie);
+            SeatSelectionFragment fragment = SeatSelectionFragment.newInstance(movie, selectedDate);
             fragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, fragment)
                     .addToBackStack(null)

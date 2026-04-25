@@ -13,14 +13,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.ViewHolder> {
 
@@ -54,23 +51,24 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.ViewHold
         holder.tvTickets.setText("Tickets: " + booking.getTicketCount());
         holder.tvSeats.setText("Seats: " + booking.getSeats());
 
-        if (booking.getMoviePoster() != null && !booking.getMoviePoster().isEmpty()) {
-            try {
-                int posterResId = context.getResources().getIdentifier(
-                        booking.getMoviePoster(), "drawable", context.getPackageName());
-                if (posterResId != 0) {
-                    holder.ivMoviePoster.setImageResource(posterResId);
-                } else {
-                    holder.ivMoviePoster.setImageResource(R.drawable.poster);
-                }
-            } catch (Exception e) {
+        // Load movie poster
+        try {
+            int posterResId = context.getResources().getIdentifier(
+                    booking.getMoviePoster(), "drawable", context.getPackageName());
+            if (posterResId != 0) {
+                holder.ivMoviePoster.setImageResource(posterResId);
+            } else {
                 holder.ivMoviePoster.setImageResource(R.drawable.poster);
             }
+        } catch (Exception e) {
+            holder.ivMoviePoster.setImageResource(R.drawable.poster);
         }
 
-        boolean isFutureBooking = isBookingInFuture(booking.getDate(), booking.getTime());
+        // Check if booking can be cancelled using timestamp
+        boolean isFutureBooking = isBookingInFuture(booking.getTimestamp());
 
         if (!isFutureBooking) {
+            // Past booking - disable cancel button
             holder.btnCancel.setEnabled(false);
             holder.btnCancel.setAlpha(0.5f);
             holder.btnCancel.setText("Past");
@@ -80,6 +78,7 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.ViewHold
             holder.btnCancel.setText("Cancel");
         }
 
+        // Cancel button click listener
         holder.btnCancel.setOnClickListener(v -> {
             if (!isFutureBooking) {
                 Toast.makeText(context, "Past bookings cannot be cancelled", Toast.LENGTH_SHORT).show();
@@ -90,12 +89,14 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.ViewHold
                     .setTitle("Cancel Booking")
                     .setMessage("Are you sure you want to cancel this booking?")
                     .setPositiveButton("Yes", (dialog, which) -> {
+                        // Delete from Firebase
+                        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
                         DatabaseReference bookingRef = FirebaseDatabase.getInstance()
                                 .getReference("bookings")
+                                .child(userId)
                                 .child(booking.getBookingId());
 
                         bookingRef.removeValue().addOnSuccessListener(aVoid -> {
-                            Toast.makeText(context, "Booking Cancelled Successfully", Toast.LENGTH_SHORT).show();
                             listener.onBookingCancelled(booking.getBookingId());
                         }).addOnFailureListener(e -> {
                             Toast.makeText(context, "Failed to cancel: " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -111,18 +112,9 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.ViewHold
         return bookingList.size();
     }
 
-    private boolean isBookingInFuture(String date, String time) {
-        try {
-            String dateTimeString = date + " " + time;
-            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault());
-            Date bookingDateTime = sdf.parse(dateTimeString);
-            Date currentDateTime = new Date();
-
-            return bookingDateTime != null && bookingDateTime.after(currentDateTime);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return false;
-        }
+    private boolean isBookingInFuture(long timestamp) {
+        long currentTime = System.currentTimeMillis();
+        return timestamp > currentTime;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

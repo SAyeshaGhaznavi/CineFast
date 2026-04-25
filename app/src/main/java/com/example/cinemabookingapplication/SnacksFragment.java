@@ -17,8 +17,13 @@ public class SnacksFragment extends Fragment {
     private int seatCount;
     private double seatTotalPrice;
     private int moviePosterResId;
+    private String bookingDate;
+    private String bookingTime;
+    private long timestamp;
 
-    public static SnacksFragment newInstance(String movieName, String selectedSeats, int seatCount, double seatTotalPrice, int moviePosterResId) {
+    public static SnacksFragment newInstance(String movieName, String selectedSeats, int seatCount,
+                                             double seatTotalPrice, int moviePosterResId,
+                                             String date, String time, long timestamp) {
         SnacksFragment fragment = new SnacksFragment();
         Bundle args = new Bundle();
         args.putString("movieName", movieName);
@@ -26,6 +31,9 @@ public class SnacksFragment extends Fragment {
         args.putInt("seatCount", seatCount);
         args.putDouble("seatTotalPrice", seatTotalPrice);
         args.putInt("moviePosterResId", moviePosterResId);
+        args.putString("date", date);
+        args.putString("time", time);
+        args.putLong("timestamp", timestamp);
         fragment.setArguments(args);
         return fragment;
     }
@@ -39,7 +47,10 @@ public class SnacksFragment extends Fragment {
             selectedSeats = getArguments().getString("selectedSeats");
             seatCount = getArguments().getInt("seatCount");
             seatTotalPrice = getArguments().getDouble("seatTotalPrice");
-            moviePosterResId = getArguments().getInt("moviePosterResId", R.drawable.poster); // Get poster
+            moviePosterResId = getArguments().getInt("moviePosterResId", R.drawable.poster);
+            bookingDate = getArguments().getString("date");
+            bookingTime = getArguments().getString("time");
+            timestamp = getArguments().getLong("timestamp");
         }
 
         ListView listView = view.findViewById(R.id.snackListView);
@@ -51,7 +62,6 @@ public class SnacksFragment extends Fragment {
         }
 
         snackList = new ArrayList<>();
-
         snackList.add(new Snack("Popcorn", 8.99, R.drawable.popcorn));
         snackList.add(new Snack("Nachos", 7.99, R.drawable.nachos));
         snackList.add(new Snack("Drink", 5.99, R.drawable.drink));
@@ -92,7 +102,6 @@ public class SnacksFragment extends Fragment {
                     "\n\nSnacks:\n" + snacksSummary.toString() +
                     "\nTotal Amount: $" + String.format("%.2f", grandTotal);
 
-            // Pass the movie poster resource ID
             TicketSummaryFragment fragment = TicketSummaryFragment.newInstance(
                     bookingDetails,
                     grandTotal,
@@ -100,7 +109,10 @@ public class SnacksFragment extends Fragment {
                     selectedSeats,
                     snacksDetailsStr,
                     snacksTotal,
-                    moviePosterResId
+                    moviePosterResId,
+                    bookingDate,
+                    bookingTime,
+                    timestamp
             );
 
             requireActivity().getSupportFragmentManager()

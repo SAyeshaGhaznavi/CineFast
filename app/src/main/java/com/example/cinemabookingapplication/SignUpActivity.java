@@ -28,7 +28,6 @@ public class SignUpActivity extends AppCompatActivity {
     Button btnLogin;
     TextView tvForgottenPassword, tvSignUp;
     ImageView btnBack;
-
     FirebaseAuth auth;
 
 
@@ -81,7 +80,6 @@ public class SignUpActivity extends AppCompatActivity {
                             Toast.makeText(SignUpActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
-
         });
     }
 
